@@ -3,14 +3,16 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-DissipatoreProcessore::DissipatoreProcessore(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+DissipatoreProcessore::DissipatoreProcessore(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                                              const QString& input_socketSupportati, bool input_raffreddamentoALiquido,
                                              const QString& input_rpmVentola, const QString& input_altezza, const QString& input_livelloRumore,
                                              const QString& input_altezzaRadiatore):
-    Componente(input_nome, input_prezzo,input_produttore),socketSupportati(input_socketSupportati),raffreddamentoALiquido(input_raffreddamentoALiquido),
+    Componente(input_nome, input_prezzo,input_produttore, input_controller),socketSupportati(input_socketSupportati),raffreddamentoALiquido(input_raffreddamentoALiquido),
     rpmVentola(input_rpmVentola),altezza(input_altezza),livelloRumore(input_livelloRumore),altezzaRadiatore(input_altezzaRadiatore){}
 
-void DissipatoreProcessore::saveXMLComponente(){
+DissipatoreProcessore::DissipatoreProcessore(PCBuilderController* input_controller):Componente(input_controller){}
+
+void DissipatoreProcessore::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -120,7 +122,7 @@ void DissipatoreProcessore::saveXMLComponente(){
     }
 }
 
-void DissipatoreProcessore::deleteXMLComponente(){
+void DissipatoreProcessore::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -179,6 +181,35 @@ void DissipatoreProcessore::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* DissipatoreProcessore::clone() const{
+    return new DissipatoreProcessore(*this);
+}
+
+void DissipatoreProcessore::setAddWidget() const{
+    this->getController()->createDissipatoreProcessoreAdd();
+}
+
+void DissipatoreProcessore::addComponente() const{
+    this->getController()->eseguiAggiuntaDissipatoreProcessore();
+}
+
+void DissipatoreProcessore::setSpecsWidget() const{
+    this->getController()->createDissipatoreProcessoreSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getSocketSupportati(),this->raffreddamentoALiquido,
+                                                            this->getRpmVentola(),this->getAltezza(),this->getLivelloRumore(),this->getAltezzaRadiatore());
+}
+
+void DissipatoreProcessore::clearAddWidget() const{
+    this->getController()->clearDissipatoreProcessoreAdd();
+}
+
+void DissipatoreProcessore::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneDissipatoreProcessore(this->getNome(),this->getPrezzo());
+}
+
+QString DissipatoreProcessore::getNomeTipoComponente() const{
+    return "Dissipatore processore";
 }
 
 QString DissipatoreProcessore::getSocketSupportati() const{

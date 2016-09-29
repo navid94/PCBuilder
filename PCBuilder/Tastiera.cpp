@@ -3,13 +3,15 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Tastiera::Tastiera(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Tastiera::Tastiera(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                    const QString& input_colore, bool input_retroilluminazione, const QString& input_connessione,
                    const QString& input_tipologia, const QString& input_tipologiaSwitch):
-    Componente(input_nome,input_prezzo,input_produttore),colore(input_colore),retroilluminazione(input_retroilluminazione),
+    Componente(input_nome,input_prezzo,input_produttore,input_controller),colore(input_colore),retroilluminazione(input_retroilluminazione),
     connessione(input_connessione),tipologia(input_tipologia),tipologiaSwitch(input_tipologiaSwitch){}
 
-void Tastiera::saveXMLComponente(){
+Tastiera::Tastiera(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Tastiera::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -111,7 +113,7 @@ void Tastiera::saveXMLComponente(){
     }
 }
 
-void Tastiera::deleteXMLComponente(){
+void Tastiera::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -167,6 +169,35 @@ void Tastiera::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Tastiera::clone() const{
+    return new Tastiera(*this);
+}
+
+void Tastiera::setAddWidget() const{
+    this->getController()->createTastieraAdd();
+}
+
+void Tastiera::addComponente() const{
+    this->getController()->eseguiAggiuntaTastiera();
+}
+
+void Tastiera::setSpecsWidget() const{
+    this->getController()->createTastieraSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getColore(),this->getRetroilluminazione(),
+                                               this->getConnessione(),this->getTipologia(),this->getTipologiaSwitch());
+}
+
+void Tastiera::clearAddWidget() const{
+    this->getController()->clearTastieraAdd();
+}
+
+void Tastiera::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneTastiera(this->getNome(),this->getPrezzo());
+}
+
+QString Tastiera::getNomeTipoComponente() const{
+    return "Tastiera";
 }
 
 QString Tastiera::getColore() const{

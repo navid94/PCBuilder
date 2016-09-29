@@ -9,8 +9,6 @@
 class PCBuilderGUI{
 private:
     PCBuilderController* controller;
-    MainWindow* mw;
-    Utente* u;
 public:
     PCBuilderGUI();
     ~PCBuilderGUI();

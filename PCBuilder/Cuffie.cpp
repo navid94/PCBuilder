@@ -3,15 +3,17 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Cuffie::Cuffie(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Cuffie::Cuffie(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                const QString& input_tipologia, const QString& input_sistemaAcustico, const QString& input_colore,
                bool input_microfono, const QString& input_canali, const QString& input_impedenza,
                const QString& input_frequenzaDiRisposta, const QString& input_connessione, const QString& input_connettore):
-    Componente(input_nome,input_prezzo,input_produttore),tipologia(input_tipologia),sistemaAcustico(input_sistemaAcustico),
+    Componente(input_nome,input_prezzo,input_produttore, input_controller),tipologia(input_tipologia),sistemaAcustico(input_sistemaAcustico),
     colore(input_colore),microfono(input_microfono),canali(input_canali),impedenza(input_impedenza),
     frequenzaDiRisposta(input_frequenzaDiRisposta),connessione(input_connessione),connettore(input_connettore){}
 
-void Cuffie::saveXMLComponente(){
+Cuffie::Cuffie(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Cuffie::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -145,7 +147,7 @@ void Cuffie::saveXMLComponente(){
     }
 }
 
-void Cuffie::deleteXMLComponente(){
+void Cuffie::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -213,6 +215,36 @@ void Cuffie::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Cuffie::clone() const{
+    return new Cuffie(*this);
+}
+
+void Cuffie::setAddWidget() const{
+    this->getController()->createCuffieAdd();
+}
+
+void Cuffie::addComponente() const{
+    this->getController()->eseguiAggiuntaCuffie();
+}
+
+void Cuffie::setSpecsWidget() const{
+    this->getController()->createCuffieSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getTipologia(),this->getSistemaAcustico(),
+                                             this->getColore(),this->getMicrofono(),this->getCanali(),this->getImpedenza(),this->getFrequenzaDiRisposta(),
+                                             this->getConnessione(),this->getConnettore());
+}
+
+void Cuffie::clearAddWidget() const{
+    this->getController()->clearCuffieAdd();
+}
+
+QString Cuffie::getNomeTipoComponente() const{
+    return "Cuffie";
+}
+
+void Cuffie::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneCuffie(this->getNome(),this->getPrezzo());
 }
 
 QString Cuffie::getTipologia() const{

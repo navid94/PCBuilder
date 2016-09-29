@@ -3,14 +3,16 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Altoparlanti::Altoparlanti(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Altoparlanti::Altoparlanti(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                            const QString& input_colore, const QString& input_configurazione,
                            const QString& input_frequenzaDiRisposta, const QString& input_potenzaTotale,
-                           const QString& input_potenze):Componente(input_nome,input_prezzo,input_produttore),
+                           const QString& input_potenze):Componente(input_nome,input_prezzo,input_produttore,input_controller),
     colore(input_colore),configurazione(input_configurazione),frequenzaDiRisposta(input_frequenzaDiRisposta),
     potenzaTotale(input_potenzaTotale),potenze(input_potenze){}
 
-void Altoparlanti::saveXMLComponente(){
+Altoparlanti::Altoparlanti(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Altoparlanti::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -112,7 +114,7 @@ void Altoparlanti::saveXMLComponente(){
     }
 }
 
-void Altoparlanti::deleteXMLComponente(){
+void Altoparlanti::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -170,6 +172,34 @@ void Altoparlanti::deleteXMLComponente(){
     }
 }
 
+Componente* Altoparlanti::clone() const{
+    return new Altoparlanti(*this);
+}
+
+void Altoparlanti::setAddWidget() const{
+    this->getController()->createAltoparlantiAdd();
+}
+
+void Altoparlanti::addComponente() const{
+    this->getController()->eseguiAggiuntaAltoparlanti();
+}
+
+void Altoparlanti::setSpecsWidget() const{
+    this->getController()->createAltoparlantiSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getColore(),this->getConfigurazione(),
+                                                   this->getFrequenzaDiRisposta(),this->getPotenzaTotale(),this->getPotenze());
+}
+
+void Altoparlanti::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneAltoparlanti(this->getNome(),this->getPrezzo());
+}
+
+void Altoparlanti::clearAddWidget() const{
+    this->getController()->clearAltoparlantiAdd();
+}
+
+QString Altoparlanti::getNomeTipoComponente() const{
+    return "Altoparlanti";
+}
 
 QString Altoparlanti::getColore() const{
     return colore;

@@ -2,16 +2,20 @@
 #include <QFile>
 #include <QDomDocument>
 #include <QTextStream>
+#include <iostream>
+using namespace std;
 
 Alimentatore::Alimentatore(const QString& input_nome, double input_prezzo,
-                           const QString& input_produttore, const QString& input_tipologia,
+                           const QString& input_produttore, PCBuilderController* input_controller, const QString& input_tipologia,
                            const QString& input_wattaggio, const QString& input_modulare,
                            const QString& input_cerfificazioneEfficienza, double input_efficienza):
-    Componente(input_nome,input_prezzo,input_produttore),tipologia(input_tipologia),
+    Componente(input_nome,input_prezzo,input_produttore,input_controller),tipologia(input_tipologia),
     wattaggio(input_wattaggio),modulare(input_modulare),certificazioneEfficienza(input_cerfificazioneEfficienza),
     efficienza(input_efficienza){}
 
-void Alimentatore::saveXMLComponente(){
+Alimentatore::Alimentatore(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Alimentatore::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -113,7 +117,7 @@ void Alimentatore::saveXMLComponente(){
     }
 }
 
-void Alimentatore::deleteXMLComponente(){
+void Alimentatore::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -169,6 +173,35 @@ void Alimentatore::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Alimentatore::clone() const{
+    return new Alimentatore(*this);
+}
+
+void Alimentatore::setAddWidget() const{
+    this->getController()->createAlimentatoreAdd();
+}
+
+void Alimentatore::addComponente() const{
+    this->getController()->eseguiAggiuntaAlimentatore();
+}
+
+void Alimentatore::setSpecsWidget() const{
+    this->getController()->createAlimentatoreSpecs(this->getNome(), this->getPrezzo(), this->getProduttore(), this->getTipologia(),
+                                                   this->getWattaggio(), this->getModulare(), this->getCertificazioneEfficienza(), this->getEfficienza());
+}
+
+void Alimentatore::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneAlimentatore(this->getNome(),this->getPrezzo());
+}
+
+void Alimentatore::clearAddWidget() const{
+    this->getController()->clearAlimentatoreAdd();
+}
+
+QString Alimentatore::getNomeTipoComponente() const{
+    return "Alimentatore";
 }
 
 QString Alimentatore::getTipologia() const{

@@ -32,6 +32,7 @@ MainWindow::MainWindow(PCBuilderController* input_controller):controller(input_c
     LeMieConfigurazioniPCBuilder=0;
     CercaPartiPCBuilder=0;
     SpecificheComponentePCBuilder=0;
+    ConfigurazionePCBuilder=0;
 
     stackedWidget=new QStackedWidget;
     scrollArea=new QScrollArea;
@@ -159,6 +160,18 @@ MyWidget_SpecificheComponentePCBuilder* MainWindow::get_SpecificheComponentePCBu
     return SpecificheComponentePCBuilder;
 }
 
+MyWidget_ConfigurazionePCBuilder* MainWindow::get_ConfigurazionePCBuilder() const{
+    return ConfigurazionePCBuilder;
+}
+
+void MainWindow::set_PartsListPCBuilder(MyWidget_PartsListPCBuilder* p){
+    PartsListPCBuilder=p;
+}
+
+void MainWindow::set_CreaConfPCBuilder(MyWidget_CreaConfPCBuilder* p){
+    CreaConfPCBuilder=p;
+}
+
 void MainWindow::openCreaConfPCBuilder(){
     if (IndexUtenteNonRegistratoPCBuilder)
     {
@@ -186,11 +199,11 @@ void MainWindow::openCreaConfPCBuilder(){
     }
     if (!CreaConfPCBuilder)
     {
-        CreaConfPCBuilder=new MyWidget_CreaConfPCBuilder();
+        CreaConfPCBuilder=new MyWidget_CreaConfPCBuilder;
         stackedWidget->addWidget(CreaConfPCBuilder);
         connect(CreaConfPCBuilder->getIndietroPushButton(),SIGNAL(clicked()),controller,SLOT(callShowIndex()));
         connect(CreaConfPCBuilder,SIGNAL(sendMessage(const QString&)),this,SLOT(openPartsListPCBuilder(const QString&)));
-        connect(CreaConfPCBuilder->getNuovaConfigurazionePushButton(),SIGNAL(clicked()),this,SLOT(resetConfigurazione()));
+        connect(CreaConfPCBuilder->getNuovaConfigurazionePushButton(),SIGNAL(clicked()),controller,SLOT(resetConfigurazione()));
         connect(CreaConfPCBuilder->getSalvaConfigurazionePushButton(),SIGNAL(clicked()),controller,SLOT(saveConfigurazione()));
     }
     stackedWidget->setCurrentWidget(CreaConfPCBuilder);
@@ -417,6 +430,7 @@ void MainWindow::openGestisciComponentiPCBuilder(){
         connect(GestisciComponentiPCBuilder->get_indietroPushButton(),SIGNAL(clicked()),this,SLOT(openIndexAdminPCBuilder()));
         connect(GestisciComponentiPCBuilder->get_aggiungi_PushButton(),SIGNAL(clicked()),controller,SLOT(aggiungi_componente()));
         connect(GestisciComponentiPCBuilder->get_rimuoviPushButton(),SIGNAL(clicked()),controller,SLOT(callRimuoviComponente()));
+        connect(GestisciComponentiPCBuilder->getTipo_componenteAggiungi(),SIGNAL(currentIndexChanged(const QString&)),controller,SLOT(callSetAddWidget(const QString&)));
     }
     stackedWidget->setCurrentWidget(GestisciComponentiPCBuilder);
 }
@@ -447,159 +461,27 @@ void MainWindow::openModificaProfiloUtentePCBuilder(){
     stackedWidget->setCurrentWidget(ModificaProfiloUtentePCBuilder);
 }
 
-void MainWindow::openPartsListPCBuilder(const QString& comp){
+void MainWindow::openPartsListPCBuilder(const QString& componente){
     if (!PartsListPCBuilder)
     {
-        PartsListPCBuilder=new MyWidget_PartsListPCBuilder(comp);
+        PartsListPCBuilder=new MyWidget_PartsListPCBuilder;
         connect(PartsListPCBuilder->getIndietroPushButton(),SIGNAL(clicked()),this,SLOT(openCreaConfPCBuilder()));
-        connect(PartsListPCBuilder,SIGNAL(sendMessage(const QString&)),this,SLOT(updateConfigurazione(const QString&)));
+        connect(PartsListPCBuilder,SIGNAL(sendMessage(const QString&)),controller,SLOT(updateConfigurazione(const QString&)));
         stackedWidget->addWidget(PartsListPCBuilder);
+        controller->populatePartsList(componente);
     }
     stackedWidget->setCurrentWidget(PartsListPCBuilder);
 }
 
-void MainWindow::closeEvent(QCloseEvent* event){
-    emit closeMainWindow();
-}
-
-void MainWindow::updateConfigurazione(const QString& text){
-    QStringList list=text.split("&");
-    QString nome=list.at(0);
-    QString prezzo=list.at(1);
-    QString componente=list.at(2);
-
-    if (componente=="Alimentatore")
+void MainWindow::openConfigurazionePCBuilder(const QString& nomeConfigurazione){
+    if (!ConfigurazionePCBuilder)
     {
-        CreaConfPCBuilder->setAlimentatorePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiAlimentatorePushButton());
-        delete (CreaConfPCBuilder->getAggiungiAlimentatorePushButton());
-        CreaConfPCBuilder->getAlimentatoreNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getAlimentatoreNomeLabel(),8,1,1,1);
+        ConfigurazionePCBuilder=new MyWidget_ConfigurazionePCBuilder;
+        controller->createConfigurazioneView(nomeConfigurazione);
+        connect(ConfigurazionePCBuilder->getIndietroPushButton(),SIGNAL(clicked()),this,SLOT(openLeMieConfigurazioniPCBuilder()));
+        stackedWidget->addWidget(ConfigurazionePCBuilder);
     }
-    if (componente=="Altoparlanti")
-    {
-        CreaConfPCBuilder->setAltoparlantiPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiAltoparlantiPushButton());
-        delete (CreaConfPCBuilder->getAggiungiAltoparlantiPushButton());
-        CreaConfPCBuilder->getAltoparlantiNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getAltoparlantiNomeLabel(),15,1,1,1);
-    }
-    if (componente=="Archiviazione")
-    {
-        CreaConfPCBuilder->setArchiviazionePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiArchiviazionePushButton());
-        delete (CreaConfPCBuilder->getAggiungiArchiviazionePushButton());
-        CreaConfPCBuilder->getArchiviazioneNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getArchiviazioneNomeLabel(),5,1,1,1);
-    }
-    if (componente=="Case")
-    {
-        CreaConfPCBuilder->setCasePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiCasePushButton());
-        delete (CreaConfPCBuilder->getAggiungiCasePushButton());
-        CreaConfPCBuilder->getCaseNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getCaseNomeLabel(),7,1,1,1);
-    }
-    if (componente=="Processore")
-    {
-        CreaConfPCBuilder->setProcessorePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiProcessorePushButton());
-        delete (CreaConfPCBuilder->getAggiungiProcessorePushButton());
-        CreaConfPCBuilder->getProcessoreNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getProcessoreNomeLabel(),1,1,1,1);
-    }
-    if (componente=="Cuffie")
-    {
-        CreaConfPCBuilder->setCuffiePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiCuffiePushButton());
-        delete (CreaConfPCBuilder->getAggiungiCuffiePushButton());
-        CreaConfPCBuilder->getCuffieNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getCuffieNomeLabel(),14,1,1,1);
-    }
-    if (componente=="DissipatoreProcessore")
-    {
-        CreaConfPCBuilder->setDissipatoreProcessorePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiDissipatoreProcessorePushButton());
-        delete (CreaConfPCBuilder->getAggiungiDissipatoreProcessorePushButton());
-        CreaConfPCBuilder->getDissipatoreProcessoreNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getDissipatoreProcessoreNomeLabel(),2,1,1,1);
-    }
-    if (componente=="Memoria")
-    {
-        CreaConfPCBuilder->setMemoriaPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiMemoriaPushButton());
-        delete (CreaConfPCBuilder->getAggiungiMemoriaPushButton());
-        CreaConfPCBuilder->getMemoriaNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getMemoriaNomeLabel(),4,1,1,1);
-    }
-    if (componente=="Monitor")
-    {
-        CreaConfPCBuilder->setMonitorPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiMonitorPushButton());
-        delete (CreaConfPCBuilder->getAggiungiMonitorPushButton());
-        CreaConfPCBuilder->getMonitorNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getMonitorNomeLabel(),11,1,1,1);
-    }
-    if (componente=="Mouse")
-    {
-        CreaConfPCBuilder->setMousePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiMousePushButton());
-        delete (CreaConfPCBuilder->getAggiungiMousePushButton());
-        CreaConfPCBuilder->getMouseNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getMouseNomeLabel(),12,1,1,1);
-    }
-    if (componente=="SchedaGrafica")
-    {
-        CreaConfPCBuilder->setSchedaGraficaPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiSchedaGraficaPushButton());
-        delete (CreaConfPCBuilder->getAggiungiSchedaGraficaPushButton());
-        CreaConfPCBuilder->getSchedaGraficaNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getSchedaGraficaNomeLabel(),6,1,1,1);
-    }
-    if (componente=="SchedaMadre")
-    {
-        CreaConfPCBuilder->setSchedaMadrePrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiSchedaMadrePushButton());
-        delete (CreaConfPCBuilder->getAggiungiSchedaMadrePushButton());
-        CreaConfPCBuilder->getSchedaMadreNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getSchedaMadreNomeLabel(),3,1,1,1);
-    }
-    if (componente=="SistemaOperativo")
-    {
-        CreaConfPCBuilder->setSistemaOperativoPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiSistemaOperativoPushButton());
-        delete (CreaConfPCBuilder->getAggiungiSistemaOperativoPushButton());
-        CreaConfPCBuilder->getSistemaOperativoNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getSistemaOperativoNomeLabel(),10,1,1,1);
-    }
-    if (componente=="Tastiera")
-    {
-        CreaConfPCBuilder->setTastieraPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiTastieraPushButton());
-        delete (CreaConfPCBuilder->getAggiungiTastieraPushButton());
-        CreaConfPCBuilder->getTastieraNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getTastieraNomeLabel(),13,1,1,1);
-    }
-    if (componente=="UnitaOttica")
-    {
-        CreaConfPCBuilder->setUnitaOtticaPrezzoLabel("€ "+(prezzo));
-        CreaConfPCBuilder->getGridLayout()->removeWidget(CreaConfPCBuilder->getAggiungiUnitaOtticaPushButton());
-        delete (CreaConfPCBuilder->getAggiungiUnitaOtticaPushButton());
-        CreaConfPCBuilder->getUnitaOtticaNomeLabel()->setText(nome);
-        CreaConfPCBuilder->getGridLayout()->addWidget(CreaConfPCBuilder->getUnitaOtticaNomeLabel(),9,1,1,1);
-    }
-    stackedWidget->removeWidget(PartsListPCBuilder);
-    delete PartsListPCBuilder;
-    PartsListPCBuilder=0;
-    CreaConfPCBuilder->updateTotalePrezzo();
-    stackedWidget->setCurrentWidget(CreaConfPCBuilder);
-}
-
-void MainWindow::resetConfigurazione(){
-    stackedWidget->removeWidget(CreaConfPCBuilder);
-    delete CreaConfPCBuilder;
-    CreaConfPCBuilder=0;
-    openCreaConfPCBuilder();
+    stackedWidget->setCurrentWidget(ConfigurazionePCBuilder);
 }
 
 void MainWindow::openLoginPopUpPCBuilder(){
@@ -623,11 +505,19 @@ void MainWindow::openLeMieConfigurazioniPCBuilder(){
         delete IndexUtentePremiumPCBuilder;
         IndexUtentePremiumPCBuilder=0;
     }
+    if (ConfigurazionePCBuilder)
+    {
+        stackedWidget->removeWidget(ConfigurazionePCBuilder);
+        delete ConfigurazionePCBuilder;
+        ConfigurazionePCBuilder=0;
+    }
     if (!LeMieConfigurazioniPCBuilder)
     {
-        LeMieConfigurazioniPCBuilder=new MyWidget_LeMieConfigurazioniPCBuilder(this);
+        LeMieConfigurazioniPCBuilder=new MyWidget_LeMieConfigurazioniPCBuilder;
         connect(LeMieConfigurazioniPCBuilder->getIndietroPushButton(),SIGNAL(clicked()),controller,SLOT(callShowIndex()));
-        connect(LeMieConfigurazioniPCBuilder,SIGNAL(sendMessage(const QString&)),controller,SLOT(editConfigurazione(const QString&)));
+        connect(LeMieConfigurazioniPCBuilder,SIGNAL(sendViewMessage(const QString&)),this,SLOT(openConfigurazionePCBuilder(const QString&)));
+        connect(LeMieConfigurazioniPCBuilder,SIGNAL(sendEditMessage(const QString&)),controller,SLOT(editConfigurazione(const QString&)));
+        controller->populateConfigurazioneList();
         stackedWidget->addWidget(LeMieConfigurazioniPCBuilder);
     }
     stackedWidget->setCurrentWidget(LeMieConfigurazioniPCBuilder);
@@ -656,12 +546,17 @@ void MainWindow::openCercaPartiPCBuilder(){
     stackedWidget->setCurrentWidget(CercaPartiPCBuilder);
 }
 
-void MainWindow::openSpecificheComponentePCBuilder(const QString& componente){
+void MainWindow::openSpecificheComponentePCBuilder(const QString& nomeComponente){
     if (!SpecificheComponentePCBuilder)
     {
-        SpecificheComponentePCBuilder=new MyWidget_SpecificheComponentePCBuilder(this,componente);
+        SpecificheComponentePCBuilder=new MyWidget_SpecificheComponentePCBuilder;
         connect(SpecificheComponentePCBuilder->getIndietroPushButton(),SIGNAL(clicked()),this,SLOT(openCercaPartiPCBuilder()));
+        this->get_Controller()->callSetSpecsWidget(nomeComponente);
         stackedWidget->addWidget(SpecificheComponentePCBuilder);
     }
     stackedWidget->setCurrentWidget(SpecificheComponentePCBuilder);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event){
+    emit closeMainWindow();
 }

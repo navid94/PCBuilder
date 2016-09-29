@@ -1,19 +1,18 @@
 #include "MyWidget_PartsListPCBuilder.h"
-#include <QLayout>
 #include <QFile>
 #include <QTextStream>
 #include <QDomNode>
 #include <QVector>
 
-MyWidget_PartsListPCBuilder::MyWidget_PartsListPCBuilder(const QString& input_componente ,QWidget* parent):
-    QWidget(parent),componente(input_componente){
+MyWidget_PartsListPCBuilder::MyWidget_PartsListPCBuilder(QWidget* parent):
+    QWidget(parent),row(1){
     createLabels();
     createPushButtons();
 
     signalMapper=new QSignalMapper(this);
 
     QHBoxLayout* horizontalLayout1=new QHBoxLayout;
-    QGridLayout* gridLayout=new QGridLayout;
+    gridLayout=new QGridLayout;
     QVBoxLayout* verticalLayout1=new QVBoxLayout;
 
     horizontalLayout1->addWidget(indietroPushButton);
@@ -23,66 +22,11 @@ MyWidget_PartsListPCBuilder::MyWidget_PartsListPCBuilder(const QString& input_co
     gridLayout->addWidget(produttoreLabel,0,1,1,1);
     gridLayout->addWidget(prezzoLabel,0,2,1,1);
 
-    QString filename="Componenti.xml";
-    if (QFile::exists(filename))
-    {
-        QFile file(filename);
-        QDomDocument doc("Componenti");
-        file.open(QIODevice::ReadOnly);
-        doc.setContent(&file);
-        QDomNode root=doc.firstChildElement();
-        QDomNode componente_node=root.firstChildElement();
-        int n=0,i=1;
-        QVector<QLabel*> componenteLabels;
-        QVector<QLabel*> produttoreLabels;
-        QVector<QLabel*> prezzoLabels;
-        QVector<QPushButton*> aggiungiPushButtons;
-        QFont form_font;
-        form_font.setPointSize(14);
-        while (!componente_node.isNull())
-        {
-            QDomNode nome_node=componente_node.firstChildElement();
-            QString nome=nome_node.firstChild().nodeValue();
-            QDomNode prezzo_node=nome_node.nextSiblingElement();
-            double prezzo=prezzo_node.firstChild().nodeValue().toDouble();
-            QDomNode produttore_node=prezzo_node.nextSiblingElement();
-            QString produttore=produttore_node.firstChild().nodeValue();
 
-            if (componente_node.nodeName()==componente)
-            {
-                componenteLabels.append(new QLabel(nome));
-                componenteLabels[n]->setFont(form_font);
-                componenteLabels[n]->setMaximumHeight(30);
-                componenteLabels[n]->setMinimumSize(QSize(0,0));
-                gridLayout->addWidget(componenteLabels[n],i,0,1,1);
-                produttoreLabels.append(new QLabel(produttore));
-                produttoreLabels[n]->setFont(form_font);
-                produttoreLabels[n]->setMaximumHeight(30);
-                produttoreLabels[n]->setMinimumSize(QSize(0,0));
-                gridLayout->addWidget(produttoreLabels[n],i,1,1,1);
-                prezzoLabels.append(new QLabel("€ "+(QString::number(prezzo))));
-                prezzoLabels[n]->setFont(form_font);
-                prezzoLabels[n]->setMaximumHeight(30);
-                prezzoLabels[n]->setMinimumSize(QSize(0,0));
-                gridLayout->addWidget(prezzoLabels[n],i,2,1,1);
-                aggiungiPushButtons.append(new QPushButton(tr("Aggiungi")));
-                aggiungiPushButtons[n]->setMaximumSize(QSize(150,50));
-                aggiungiPushButtons[n]->setMinimumSize(QSize(0,0));
-                connect(aggiungiPushButtons[n],SIGNAL(clicked()),signalMapper,SLOT(map()));
-                QString info=nome+("&")+(QString::number(prezzo))+("&")+(componente);
-                signalMapper->setMapping(aggiungiPushButtons[n],info);
-                gridLayout->addWidget(aggiungiPushButtons[n],i,3,1,1);
-
-                i++;
-                n++;
-            }
-            componente_node=componente_node.nextSiblingElement();
-        }
-        file.close();
-    }
-    connect(signalMapper,SIGNAL(mapped(const QString&)),this,SIGNAL(sendMessage(const QString&)));
     verticalLayout1->addLayout(horizontalLayout1);
     verticalLayout1->addLayout(gridLayout);
+
+    connect(signalMapper,SIGNAL(mapped(const QString&)),this,SIGNAL(sendMessage(const QString&)));
 
     setLayout(verticalLayout1);
 }
@@ -122,4 +66,36 @@ void MyWidget_PartsListPCBuilder::createPushButtons(){
 
 QPushButton* MyWidget_PartsListPCBuilder::getIndietroPushButton() const{
     return indietroPushButton;
+}
+
+QGridLayout* MyWidget_PartsListPCBuilder::getGridLayout() const{
+    return gridLayout;
+}
+
+QSignalMapper* MyWidget_PartsListPCBuilder::getSignalMapper() const{
+    return signalMapper;
+}
+
+void MyWidget_PartsListPCBuilder::addComponent(const QString& nome, const QString& produttore, double prezzo){
+    QFont form_font;
+    form_font.setPointSize(14);
+    QLabel* nomeLabel=new QLabel(nome);
+    nomeLabel->setFont(form_font);
+    nomeLabel->setMinimumSize(QSize(0,0));
+    QLabel* produttoreLabel=new QLabel(produttore);
+    produttoreLabel->setFont(form_font);
+    produttoreLabel->setMinimumSize(QSize(0,0));
+    QLabel* prezzoLabel=new QLabel("€ "+(QString::number(prezzo)));
+    prezzoLabel->setFont(form_font);
+    prezzoLabel->setMinimumSize(QSize(0,0));
+    QPushButton* aggiungiPushButton=new QPushButton(tr("Aggiungi"));
+    aggiungiPushButton->setMaximumSize(QSize(150,50));
+    aggiungiPushButton->setMinimumSize(QSize(0,0));
+    connect(aggiungiPushButton,SIGNAL(clicked()),signalMapper,SLOT(map()));
+    signalMapper->setMapping(aggiungiPushButton,nome);
+    this->gridLayout->addWidget(nomeLabel,row,0,1,1);
+    this->gridLayout->addWidget(produttoreLabel,row,1,1,1);
+    this->gridLayout->addWidget(prezzoLabel,row,2,1,1);
+    this->gridLayout->addWidget(aggiungiPushButton,row,3,1,1);
+    row++;
 }

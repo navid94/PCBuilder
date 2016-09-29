@@ -6,14 +6,14 @@
 #include <QPushButton>
 #include <QString>
 #include <QSignalMapper>
-
-class MainWindow;
+#include <QLayout>
 
 class MyWidget_LeMieConfigurazioniPCBuilder:public QWidget{
     Q_OBJECT
 private:
-    MainWindow* mw;
-    QSignalMapper* signalMapper;
+    QSignalMapper* viewSignalMapper;
+    QSignalMapper* editSignalMapper;
+    QGridLayout* gridLayout;
 
     QLabel* PCBuilder_LeMieConfigurazioniLabel;
     QLabel* nomeConfigurazioneLabel;
@@ -23,11 +23,15 @@ private:
     void createLabels();
     void createPushButtons();
 public:
-    MyWidget_LeMieConfigurazioniPCBuilder(MainWindow*, QWidget* =0);
+    MyWidget_LeMieConfigurazioniPCBuilder(QWidget* =0);
 
     QPushButton* getIndietroPushButton() const;
+    QGridLayout* getGridLayout() const;
+    QSignalMapper* getViewSignalMapper() const;
+    QSignalMapper* getEditSignalMapper() const;
 signals:
-    void sendMessage(const QString&);
+    void sendEditMessage(const QString&);
+    void sendViewMessage(const QString&);
 };
 
 #endif // MYWIDGET_LEMIECONFIGURAZIONIPCBUILDER_H

@@ -1,30 +1,16 @@
 #include "MyWidget_LeMieConfigurazioniPCBuilder.h"
-#include "MainWindow.h"
-#include "PCBuilderController.h"
-#include "Utente.h"
-#include "Configurazione.h"
 
-#include <QLayout>
-#include <QVector>
-
-MyWidget_LeMieConfigurazioniPCBuilder::MyWidget_LeMieConfigurazioniPCBuilder(MainWindow* input_mw, QWidget* parent)
-    :QWidget(parent),mw(input_mw){
+MyWidget_LeMieConfigurazioniPCBuilder::MyWidget_LeMieConfigurazioniPCBuilder(QWidget* parent)
+    :QWidget(parent){
     createLabels();
     createPushButtons();
 
-    signalMapper=new QSignalMapper(this);
+    viewSignalMapper=new QSignalMapper(this);
+    editSignalMapper=new QSignalMapper(this);
 
     QHBoxLayout* horizontalLayout1=new QHBoxLayout;
     QVBoxLayout* verticalLayout1=new QVBoxLayout;
-    QGridLayout* gridLayout=new QGridLayout;
-
-    QVector<QPushButton*> modificaPushButtons;
-    QVector<QLabel*> nomeConfigurazioneLabels;
-
-    QVector<Configurazione*>* v=mw->get_Controller()->getUser()->getConfigurazioni();
-
-    QFont font_form;
-    font_form.setPointSize(14);
+    gridLayout=new QGridLayout;
 
     horizontalLayout1->addWidget(indietroPushButton);
     horizontalLayout1->addWidget(PCBuilder_LeMieConfigurazioniLabel);
@@ -33,23 +19,8 @@ MyWidget_LeMieConfigurazioniPCBuilder::MyWidget_LeMieConfigurazioniPCBuilder(Mai
     verticalLayout1->addLayout(gridLayout);
 
     gridLayout->addWidget(nomeConfigurazioneLabel,0,0,1,1);
-    for (int i=0;i<v->size();i++)
-    {
-        QString nomeConfigurazione=v->at(i)->getNome();
-        nomeConfigurazioneLabels.append(new QLabel(nomeConfigurazione));
-        nomeConfigurazioneLabels[i]->setFont(font_form);
-        nomeConfigurazioneLabels[i]->setMaximumHeight(30);
-        nomeConfigurazioneLabels[i]->setMinimumSize(QSize(0,0));
-        gridLayout->addWidget(nomeConfigurazioneLabels[i],i+1,0,1,1);
-
-        modificaPushButtons.append(new QPushButton(tr("Modifica")));
-        modificaPushButtons[i]->setMaximumSize(QSize(150,30));
-        modificaPushButtons[i]->setMinimumSize(QSize(0,0));
-        connect(modificaPushButtons[i],SIGNAL(clicked()),signalMapper,SLOT(map()));
-        signalMapper->setMapping(modificaPushButtons[i],nomeConfigurazione);
-        gridLayout->addWidget(modificaPushButtons[i],i+1,1,1,1);
-    }
-    connect(signalMapper,SIGNAL(mapped(const QString&)),this,SIGNAL(sendMessage(const QString&)));
+    connect(editSignalMapper,SIGNAL(mapped(const QString&)),this,SIGNAL(sendEditMessage(const QString&)));
+    connect(viewSignalMapper,SIGNAL(mapped(const QString&)),this,SIGNAL(sendViewMessage(const QString&)));
     setLayout(verticalLayout1);
 }
 
@@ -78,4 +49,16 @@ void MyWidget_LeMieConfigurazioniPCBuilder::createPushButtons(){
 
 QPushButton* MyWidget_LeMieConfigurazioniPCBuilder::getIndietroPushButton() const{
     return indietroPushButton;
+}
+
+QGridLayout* MyWidget_LeMieConfigurazioniPCBuilder::getGridLayout() const{
+    return gridLayout;
+}
+
+QSignalMapper* MyWidget_LeMieConfigurazioniPCBuilder::getViewSignalMapper() const{
+    return viewSignalMapper;
+}
+
+QSignalMapper* MyWidget_LeMieConfigurazioniPCBuilder::getEditSignalMapper() const{
+    return editSignalMapper;
 }

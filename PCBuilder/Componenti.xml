@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Componenti>
+ <Memoria>
+  <Nome>G.Skill Ripjaws V Series</Nome>
+  <Prezzo>70.7</Prezzo>
+  <Produttore>G.Skill</Produttore>
+  <Velocita>DDR4-2400</Velocita>
+  <Capacita>16GB (2 x 8GB)</Capacita>
+  <Tipologia>288-pin DIMM</Tipologia>
+  <Latenza>15</Latenza>
+ </Memoria>
+ <Memoria>
+  <Nome>Kingston HyperX Fury Black</Nome>
+  <Prezzo>38.8</Prezzo>
+  <Produttore>Kingston</Produttore>
+  <Velocita>DDR4-2133</Velocita>
+  <Capacita>8GB (2 x 4GB)</Capacita>
+  <Tipologia>288-pin DIMM</Tipologia>
+  <Latenza>14</Latenza>
+ </Memoria>
+ <Memoria>
+  <Nome>Crucial Ballistix Sport LT</Nome>
+  <Prezzo>61</Prezzo>
+  <Produttore>Crucial</Produttore>
+  <Velocita>DDR4-2400</Velocita>
+  <Capacita>16GB (2 x 8GB)</Capacita>
+  <Tipologia>288-pin DIMM</Tipologia>
+  <Latenza>16</Latenza>
+ </Memoria>
+ <Memoria>
+  <Nome>Corsair Vengeance Pro</Nome>
+  <Prezzo>72.4</Prezzo>
+  <Produttore>Corsair</Produttore>
+  <Velocita>DDR3-2400</Velocita>
+  <Capacita>16GB (2 x 8GB)</Capacita>
+  <Tipologia>240-pin DIMM</Tipologia>
+  <Latenza>11</Latenza>
+ </Memoria>
+ <SchedaGrafica>
+  <Nome>MSI GTX 970 GAMING 4G</Nome>
+  <Prezzo>306.99</Prezzo>
+  <Produttore>MSI</Produttore>
+  <Interfaccia>PCI-Express x16</Interfaccia>
+  <Chipset>GeForce GTX 970</Chipset>
+  <Memoria>4GB</Memoria>
+  <TipologiaMemoria>GDDR5</TipologiaMemoria>
+  <FrequenzaCore>1.14Ghz</FrequenzaCore>
+  <Tdp>145 Watts</Tdp>
+  <SupportoSLI>3-way SLI</SupportoSLI>
+  <SupportoCrossfire>No</SupportoCrossfire>
+  <Lunghezza>269mm</Lunghezza>
+ </SchedaGrafica>
+ <SchedaGrafica>
+  <Nome>MSI R9 390 GAMING 8G</Nome>
+  <Prezzo>324.37</Prezzo>
+  <Produttore>MSI</Produttore>
+  <Interfaccia>PCI-Express x16</Interfaccia>
+  <Chipset>Radeon R9 390</Chipset>
+  <Memoria>8GB</Memoria>
+  <TipologiaMemoria>GDDR5</TipologiaMemoria>
+  <FrequenzaCore>1.0GHz</FrequenzaCore>
+  <Tdp>275 Watts</Tdp>
+  <SupportoSLI>No</SupportoSLI>
+  <SupportoCrossfire>4-way CrossFire</SupportoCrossfire>
+  <Lunghezza>277mm</Lunghezza>
+ </SchedaGrafica>
+ <SchedaGrafica>
+  <Nome>Gigabyte GV-N98TXTREME C-6GD</Nome>
+  <Prezzo>687.82</Prezzo>
+  <Produttore>Gigabyte</Produttore>
+  <Interfaccia>PCI-Express x16</Interfaccia>
+  <Chipset>GeForce GTX 980 Ti</Chipset>
+  <Memoria>6GB</Memoria>
+  <TipologiaMemoria>GDDR5</TipologiaMemoria>
+  <FrequenzaCore>1.0GHz</FrequenzaCore>
+  <Tdp>250 Watts</Tdp>
+  <SupportoSLI>4-way SLI</SupportoSLI>
+  <SupportoCrossfire>No</SupportoCrossfire>
+  <Lunghezza>287mm</Lunghezza>
+ </SchedaGrafica>
+ <SchedaGrafica>
+  <Nome>Sapphire 100363L R9 280X</Nome>
+  <Prezzo>220.22</Prezzo>
+  <Produttore>Sapphire</Produttore>
+  <Interfaccia>PCI-Express x16</Interfaccia>
+  <Chipset>Radeon R9 280X</Chipset>
+  <Memoria>3GB</Memoria>
+  <TipologiaMemoria>GDDR5</TipologiaMemoria>
+  <FrequenzaCore/>
+  <Tdp>250 Watts</Tdp>
+  <SupportoSLI>No</SupportoSLI>
+  <SupportoCrossfire>4-way CrossFire</SupportoCrossfire>
+  <Lunghezza>261mm</Lunghezza>
+ </SchedaGrafica>
+ <SchedaMadre>
+  <Nome>Asus Z170-A</Nome>
+  <Prezzo>146.99</Prezzo>
+  <Produttore>Asus</Produttore>
+  <FattoreDiForma>ATX</FattoreDiForma>
+  <Chipset>Intel Z170</Chipset>
+  <SocketProcessore>LGA1151</SocketProcessore>
+  <SlotMemoria>4 x 288-pin DIMM</SlotMemoria>
+  <TipologiaMemoria>DDR4-2133 / 2400 / 2666 / 2800 / 2933 / 3200 / 3300 / 3333 / 3400</TipologiaMemoria>
+  <MemoriaMassima>64GB</MemoriaMassima>
+  <SupportoRAID>1</SupportoRAID>
+  <SupportoCrossfire>1</SupportoCrossfire>
+  <SupportoSLI>1</SupportoSLI>
+  <Ethernet>1 x 10/100/1000 Mbps</Ethernet>
+  <Sata3GBs>0</Sata3GBs>
+  <Sata6GBs>4</Sata6GBs>
+  <SataExpress>1</SataExpress>
+  <Usb2>0</Usb2>
+  <Usb3>0</Usb3>
+ </SchedaMadre>
+ <SchedaMadre>
+  <Nome>MSI Z170A GAMING M5</Nome>
+  <Prezzo>171.4</Prezzo>
+  <Produttore>MSI</Produttore>
+  <FattoreDiForma>ATX</FattoreDiForma>
+  <Chipset>Intel Z170</Chipset>
+  <SocketProcessore>LGA1151</SocketProcessore>
+  <SlotMemoria>4 x 288-pin DIMM</SlotMemoria>
+  <TipologiaMemoria>DDR4-2133 / 2400 / 2800 / 3000 / 3200</TipologiaMemoria>
+  <MemoriaMassima>64GB</MemoriaMassima>
+  <SupportoRAID>1</SupportoRAID>
+  <SupportoCrossfire>1</SupportoCrossfire>
+  <SupportoSLI>1</SupportoSLI>
+  <Ethernet>1 x 10/100/1000 Mbps</Ethernet>
+  <Sata3GBs>2</Sata3GBs>
+  <Sata6GBs>2</Sata6GBs>
+  <SataExpress>2</SataExpress>
+  <Usb2>2</Usb2>
+  <Usb3>3</Usb3>
+ </SchedaMadre>
+ <SchedaMadre>
+  <Nome>Asus H110M-A</Nome>
+  <Prezzo>65.98</Prezzo>
+  <Produttore>Asus</Produttore>
+  <FattoreDiForma>Micro ATX</FattoreDiForma>
+  <Chipset>Intel H110</Chipset>
+  <SocketProcessore>LGA1151</SocketProcessore>
+  <SlotMemoria>2 x 288-pin DIMM</SlotMemoria>
+  <TipologiaMemoria>DDR4-2133</TipologiaMemoria>
+  <MemoriaMassima>32GB</MemoriaMassima>
+  <SupportoRAID>0</SupportoRAID>
+  <SupportoCrossfire>0</SupportoCrossfire>
+  <SupportoSLI>0</SupportoSLI>
+  <Ethernet>1 x 10/100/1000 Mbps</Ethernet>
+  <Sata3GBs>2</Sata3GBs>
+  <Sata6GBs>4</Sata6GBs>
+  <SataExpress>2</SataExpress>
+  <Usb2>2</Usb2>
+  <Usb3>3</Usb3>
+ </SchedaMadre>
+ <Processore>
+  <Nome>Intel Core i7-6700K</Nome>
+  <Prezzo>338</Prezzo>
+  <Produttore>Intel</Produttore>
+  <Socket>LGA1151</Socket>
+  <LarghezzaDati>64-bit</LarghezzaDati>
+  <FrequenzaOperativa>4.0GHz</FrequenzaOperativa>
+  <FrequenzaTurbo>4.2GHz</FrequenzaTurbo>
+  <NumeroCore>4</NumeroCore>
+  <L1Cache>4 x 32KB Instruction
+4 x 32KB Data</L1Cache>
+  <L2Cache>4 x 256KB</L2Cache>
+  <L3Cache>1 x 8MB</L3Cache>
+  <Litografia>14 nm</Litografia>
+  <Tdp>91 Watts</Tdp>
+  <IncludeDissipatore>0</IncludeDissipatore>
+  <HyperThreading>1</HyperThreading>
+  <GraficaIntegrata>Intel HD Graphics 530</GraficaIntegrata>
+ </Processore>
+ <Processore>
+  <Nome>AMD FX-8350</Nome>
+  <Prezzo>166.42</Prezzo>
+  <Produttore>AMD</Produttore>
+  <Socket>AM3+</Socket>
+  <LarghezzaDati>64-bit</LarghezzaDati>
+  <FrequenzaOperativa>4.0GHz</FrequenzaOperativa>
+  <FrequenzaTurbo/>
+  <NumeroCore>8</NumeroCore>
+  <L1Cache>4 x 64KB Instruction
+8 x 16KB Data</L1Cache>
+  <L2Cache>4 x 2MB</L2Cache>
+  <L3Cache>1 x 8MB</L3Cache>
+  <Litografia>32 nm</Litografia>
+  <Tdp>125 Watts</Tdp>
+  <IncludeDissipatore>1</IncludeDissipatore>
+  <HyperThreading>0</HyperThreading>
+  <GraficaIntegrata/>
+ </Processore>
+ <Processore>
+  <Nome>Intel Core i5-4690K</Nome>
+  <Prezzo>242.53</Prezzo>
+  <Produttore>Intel</Produttore>
+  <Socket>LGA1150</Socket>
+  <LarghezzaDati>64-bit</LarghezzaDati>
+  <FrequenzaOperativa>3.5GHz</FrequenzaOperativa>
+  <FrequenzaTurbo>3.9GHz</FrequenzaTurbo>
+  <NumeroCore>4</NumeroCore>
+  <L1Cache>4 x 32KB Instruction
+4 x 32KB Data</L1Cache>
+  <L2Cache>4 x 256KB</L2Cache>
+  <L3Cache>1 x 6MB</L3Cache>
+  <Litografia>22 nm</Litografia>
+  <Tdp>88 Watts</Tdp>
+  <IncludeDissipatore>1</IncludeDissipatore>
+  <HyperThreading>0</HyperThreading>
+  <GraficaIntegrata>Intel HD Graphics 4600</GraficaIntegrata>
+ </Processore>
+ <Archiviazione>
+  <Nome>Western Digital WD10EZEX</Nome>
+  <Prezzo>49</Prezzo>
+  <Produttore>Western Digital</Produttore>
+  <Tipologia>HDD</Tipologia>
+  <Capacita>1TB</Capacita>
+  <Interfaccia>SATA 6 Gb/s</Interfaccia>
+  <Cache>64MB</Cache>
+  <FattoreDiForma>3.5"</FattoreDiForma>
+  <Rpm>7200</Rpm>
+ </Archiviazione>
+ <Archiviazione>
+  <Nome>Samsung MZ-75E250B/AM</Nome>
+  <Prezzo>93.6</Prezzo>
+  <Produttore>Samsung</Produttore>
+  <Tipologia>SSD</Tipologia>
+  <Capacita>250GB</Capacita>
+  <Interfaccia>SATA 6 Gb/s</Interfaccia>
+  <Cache>N/A</Cache>
+  <FattoreDiForma>2.5"</FattoreDiForma>
+  <Rpm/>
+ </Archiviazione>
+ <Archiviazione>
+  <Nome>Kingston SV300S37A/120G</Nome>
+  <Prezzo>45.8</Prezzo>
+  <Produttore>Kingston</Produttore>
+  <Tipologia>SSD</Tipologia>
+  <Capacita>120GB</Capacita>
+  <Interfaccia>SATA 6 Gb/s</Interfaccia>
+  <Cache>N/A</Cache>
+  <FattoreDiForma>2.5"</FattoreDiForma>
+  <Rpm/>
+ </Archiviazione>
+ <Alimentatore>
+  <Nome>EVGA SuperNOVA 750</Nome>
+  <Prezzo>121.79</Prezzo>
+  <Produttore>EVGA</Produttore>
+  <Tipologia>ATX12V / EPS12V</Tipologia>
+  <Wattaggio>750 Watts</Wattaggio>
+  <Modulare>Full</Modulare>
+  <CertificazioneEfficienza>80+ Gold</CertificazioneEfficienza>
+  <Efficienza>90</Efficienza>
+ </Alimentatore>
+ <Alimentatore>
+  <Nome>Corsair RM650x</Nome>
+  <Prezzo>223.39</Prezzo>
+  <Produttore>Corsair</Produttore>
+  <Tipologia>ATX</Tipologia>
+  <Wattaggio>650 Watts</Wattaggio>
+  <Modulare>Full</Modulare>
+  <CertificazioneEfficienza>80+ Gold</CertificazioneEfficienza>
+  <Efficienza>90</Efficienza>
+ </Alimentatore>
+ <Alimentatore>
+  <Nome>Thermaltake SP-650PCBUS</Nome>
+  <Prezzo>71.53</Prezzo>
+  <Produttore>Thermaltake</Produttore>
+  <Tipologia>ATX12V</Tipologia>
+  <Wattaggio>650 Watts</Wattaggio>
+  <Modulare>No</Modulare>
+  <CertificazioneEfficienza>80+ Bronze</CertificazioneEfficienza>
+  <Efficienza>90</Efficienza>
+ </Alimentatore>
+ <DissipatoreProcessore>
+  <Nome>Cooler Master Hyper 212 EVO</Nome>
+  <Prezzo>54</Prezzo>
+  <Produttore>Cooler Master</Produttore>
+  <SocketSupportati>AM2, AM2+, AM3, AM3+, FM1, FM2, FM2+, LGA1150, LGA1151, LGA1155, LGA1156, LGA1366, LGA2011, LGA2011-3, LGA775</SocketSupportati>
+  <RaffreddamentoALiquido>0</RaffreddamentoALiquido>
+  <RpmVentola>600 - 2000 RPM</RpmVentola>
+  <Altezza>159mm</Altezza>
+  <LivelloRumore>9.0 - 36.0 dbA</LivelloRumore>
+  <AltezzaRadiatore/>
+ </DissipatoreProcessore>
+ <DissipatoreProcessore>
+  <Nome>Corsair H100i</Nome>
+  <Prezzo>106.48</Prezzo>
+  <Produttore>Corsair</Produttore>
+  <SocketSupportati>AM2, AM2+, AM3, AM3+, FM1, FM2, FM2+, LGA1150, LGA1151, LGA1155, LGA1156, LGA1366, LGA2011, LGA2011-3</SocketSupportati>
+  <RaffreddamentoALiquido>1</RaffreddamentoALiquido>
+  <RpmVentola>2700 RPM</RpmVentola>
+  <Altezza/>
+  <LivelloRumore>37.7 dbA</LivelloRumore>
+  <AltezzaRadiatore>240mm</AltezzaRadiatore>
+ </DissipatoreProcessore>
+ <DissipatoreProcessore>
+  <Nome>Noctua NH-L9i</Nome>
+  <Prezzo>39.9</Prezzo>
+  <Produttore>Noctua</Produttore>
+  <SocketSupportati>LGA1150, LGA1151, LGA1155, LGA1156</SocketSupportati>
+  <RaffreddamentoALiquido>0</RaffreddamentoALiquido>
+  <RpmVentola>2500 - 2999 RPM</RpmVentola>
+  <Altezza>37mm</Altezza>
+  <LivelloRumore/>
+  <AltezzaRadiatore/>
+ </DissipatoreProcessore>
+ <Case>
+  <Nome>NZXT S340 (Black)</Nome>
+  <Prezzo>77.36</Prezzo>
+  <Produttore>NZXT</Produttore>
+  <Tipologia>ATX Mid Tower</Tipologia>
+  <Colore>Black</Colore>
+  <AlimentatoreIncluso>0</AlimentatoreIncluso>
+  <SlotInterni25>2</SlotInterni25>
+  <SlotInterni35>3</SlotInterni35>
+  <compatibilitaSchedaMadre>ATX, Micro ATX, Mini ITX</compatibilitaSchedaMadre>
+  <LunghezzaMassimaSchedaGrafica>334mm With Drive Cages
+364mm Without Drive Cages</LunghezzaMassimaSchedaGrafica>
+  <Dimensioni/>
+ </Case>
+ <Case>
+  <Nome>Thermaltake Core V21</Nome>
+  <Prezzo>59.9</Prezzo>
+  <Produttore>Thermaltake</Produttore>
+  <Tipologia>MicroATX Mini Tower</Tipologia>
+  <Colore>Black</Colore>
+  <AlimentatoreIncluso>0</AlimentatoreIncluso>
+  <SlotInterni25>3</SlotInterni25>
+  <SlotInterni35>3</SlotInterni35>
+  <compatibilitaSchedaMadre>Micro ATX, Mini ITX</compatibilitaSchedaMadre>
+  <LunghezzaMassimaSchedaGrafica>350mm</LunghezzaMassimaSchedaGrafica>
+  <Dimensioni>424mm x 320mm x 336mm</Dimensioni>
+ </Case>
+ <Case>
+  <Nome>Cooler Master N200</Nome>
+  <Prezzo>56</Prezzo>
+  <Produttore>Cooler Master</Produttore>
+  <Tipologia>MicroATX Mid Tower</Tipologia>
+  <Colore>Black</Colore>
+  <AlimentatoreIncluso>0</AlimentatoreIncluso>
+  <SlotInterni25>4</SlotInterni25>
+  <SlotInterni35>3</SlotInterni35>
+  <compatibilitaSchedaMadre>Micro ATX, Mini ITX</compatibilitaSchedaMadre>
+  <LunghezzaMassimaSchedaGrafica>355mm</LunghezzaMassimaSchedaGrafica>
+  <Dimensioni>201mm x 378mm x 445mm</Dimensioni>
+ </Case>
+ <UnitaOttica>
+  <Nome>Lite-On iHAS124-14</Nome>
+  <Prezzo>13.36</Prezzo>
+  <Produttore>Lite-On</Produttore>
+  <FattoreDiForma>5.25"</FattoreDiForma>
+  <Interfaccia>SATA 3 Gb/s</Interfaccia>
+  <Cache/>
+  <Velocita>CD-ROM SPEED
+48X
+CD-R SPEED
+48X
+CD-RW SPEED
+24X
+DVD-ROM SPEED
+16X
+DVD+R SPEED
+24X
+DVD+R DUAL-LAYER SPEED
+8X
+DVD+RW SPEED
+8X
+DVD-R SPEED
+24X
+DVD-R DUAL-LAYER SPEED
+8X
+DVD-RW SPEED
+6X
+DVD-RAM SPEED
+5X</Velocita>
+ </UnitaOttica>
+ <UnitaOttica>
+  <Nome>LG GH24NSC0B</Nome>
+  <Prezzo>21.55</Prezzo>
+  <Produttore>LG</Produttore>
+  <FattoreDiForma>5.25"</FattoreDiForma>
+  <Interfaccia>SATA 3 Gb/s</Interfaccia>
+  <Cache/>
+  <Velocita>CD-ROM SPEED
+48X
+CD-R SPEED
+48X
+CD-RW SPEED
+24X
+DVD-ROM SPEED
+16X
+DVD+R SPEED
+24X
+DVD+R DUAL-LAYER SPEED
+8X
+DVD+RW SPEED
+8X
+DVD-R SPEED
+24X
+DVD-R DUAL-LAYER SPEED
+8X
+DVD-RW SPEED
+6X
+DVD-RAM SPEED
+5X</Velocita>
+ </UnitaOttica>
+ <UnitaOttica>
+  <Nome>Asus DRW-24B1ST/BLK/B/AS</Nome>
+  <Prezzo>35</Prezzo>
+  <Produttore>Asus</Produttore>
+  <FattoreDiForma>5.25"</FattoreDiForma>
+  <Interfaccia>SATA 3 Gb/s</Interfaccia>
+  <Cache>2MB</Cache>
+  <Velocita>CD-ROM SPEED
+48X
+CD-R SPEED
+48X
+CD-RW SPEED
+32X
+DVD-ROM SPEED
+16X
+DVD+R SPEED
+24X
+DVD+R DUAL-LAYER SPEED
+12X
+DVD+RW SPEED
+8X
+DVD-R SPEED
+24X
+DVD-R DUAL-LAYER SPEED
+12X
+DVD-RW SPEED
+6X
+DVD-RAM SPEED
+12X</Velocita>
+ </UnitaOttica>
+ <Monitor>
+  <Nome>Asus VX238H</Nome>
+  <Prezzo>151.55</Prezzo>
+  <Produttore>Asus</Produttore>
+  <RisoluzioneRaccomandata>1920 x 1080</RisoluzioneRaccomandata>
+  <Widescreen>1</Widescreen>
+  <Formato>16:9</Formato>
+  <AngoloDiVisualizzazione>170° H x 160° V</AngoloDiVisualizzazione>
+  <ColoriDelDisplay>16700000</ColoriDelDisplay>
+  <Luminosita>250 cd/m²</Luminosita>
+  <RapportoDiContrasto>80,000,000:1</RapportoDiContrasto>
+  <TempoDiRisposta>1 ms</TempoDiRisposta>
+  <TipologiaDisplay>LED</TipologiaDisplay>
+  <AltoparlantiIncorporati>1</AltoparlantiIncorporati>
+  <FrequenzaDiAggiornamento/>
+ </Monitor>
+ <Monitor>
+  <Nome>BenQ GL2460HM</Nome>
+  <Prezzo>144.32</Prezzo>
+  <Produttore>BenQ</Produttore>
+  <RisoluzioneRaccomandata>1920 x 1080</RisoluzioneRaccomandata>
+  <Widescreen>1</Widescreen>
+  <Formato>16:9</Formato>
+  <AngoloDiVisualizzazione>170° H x 160° V</AngoloDiVisualizzazione>
+  <ColoriDelDisplay/>
+  <Luminosita>250 cd/m²</Luminosita>
+  <RapportoDiContrasto/>
+  <TempoDiRisposta>2 ms</TempoDiRisposta>
+  <TipologiaDisplay>LED</TipologiaDisplay>
+  <AltoparlantiIncorporati>1</AltoparlantiIncorporati>
+  <FrequenzaDiAggiornamento>60Hz</FrequenzaDiAggiornamento>
+ </Monitor>
+ <SistemaOperativo>
+  <Nome>Microsoft Windows 10 Home (64-bit)</Nome>
+  <Prezzo>49.99</Prezzo>
+  <Produttore>Microsoft</Produttore>
+  <Modalita>64-bit</Modalita>
+  <MemoriaMassimaSupportata>128GB</MemoriaMassimaSupportata>
+ </SistemaOperativo>
+ <SistemaOperativo>
+  <Nome>Microsoft Windows 10 Pro (64-bit)</Nome>
+  <Prezzo>99</Prezzo>
+  <Produttore>Microsoft</Produttore>
+  <Modalita>64-bit</Modalita>
+  <MemoriaMassimaSupportata>512GB</MemoriaMassimaSupportata>
+ </SistemaOperativo>
+ <SistemaOperativo>
+  <Nome>Microsoft Windows 7 Professional SP1 (64-bit)</Nome>
+  <Prezzo>25.3</Prezzo>
+  <Produttore>Microsoft</Produttore>
+  <Modalita>64-bit</Modalita>
+  <MemoriaMassimaSupportata>192GB</MemoriaMassimaSupportata>
+ </SistemaOperativo>
+ <Mouse>
+  <Nome>Razer DeathAdder Chroma</Nome>
+  <Prezzo>171.35</Prezzo>
+  <Produttore>Razer</Produttore>
+  <Connessione>Wired</Connessione>
+  <TipologiaTracciamento>Optical</TipologiaTracciamento>
+  <DPIMassimi>10000</DPIMassimi>
+  <Colore>Black</Colore>
+  <OrientamentoDellaMano>Right</OrientamentoDellaMano>
+ </Mouse>
+ <Mouse>
+  <Nome>SteelSeries Rival 300</Nome>
+  <Prezzo>59.82</Prezzo>
+  <Produttore>SteelSeries</Produttore>
+  <Connessione>Wired</Connessione>
+  <TipologiaTracciamento>Optical</TipologiaTracciamento>
+  <DPIMassimi>6500</DPIMassimi>
+  <Colore>Black</Colore>
+  <OrientamentoDellaMano>Right</OrientamentoDellaMano>
+ </Mouse>
+ <Mouse>
+  <Nome>Logitech G300S</Nome>
+  <Prezzo>74.9</Prezzo>
+  <Produttore>Logitech</Produttore>
+  <Connessione>Wired</Connessione>
+  <TipologiaTracciamento>Optical</TipologiaTracciamento>
+  <DPIMassimi>2500</DPIMassimi>
+  <Colore>Black/Blue</Colore>
+  <OrientamentoDellaMano>Both</OrientamentoDellaMano>
+ </Mouse>
+ <Tastiera>
+  <Nome>Cooler Master CM Storm Devastator Gaming Bundle</Nome>
+  <Prezzo>45.99</Prezzo>
+  <Produttore>Cooler Master</Produttore>
+  <Colore>Black</Colore>
+  <Retroilluminazione>1</Retroilluminazione>
+  <Connessione>Wired</Connessione>
+  <Tipologia>Membrana</Tipologia>
+  <TipologiaSwitch/>
+ </Tastiera>
+ <Tastiera>
+  <Nome>Corsair K70</Nome>
+  <Prezzo>178.19</Prezzo>
+  <Produttore>Corsair</Produttore>
+  <Colore>Black</Colore>
+  <Retroilluminazione>1</Retroilluminazione>
+  <Connessione>Wired</Connessione>
+  <Tipologia>Meccanica</Tipologia>
+  <TipologiaSwitch>Cherry MX Red</TipologiaSwitch>
+ </Tastiera>
+ <Altoparlanti>
+  <Nome>Logitech Z506</Nome>
+  <Prezzo>187.96</Prezzo>
+  <Produttore>Logitech</Produttore>
+  <Colore/>
+  <Configurazione>5.1ch</Configurazione>
+  <FrequenzaDiRisposta>45 Hz - 20 KHz</FrequenzaDiRisposta>
+  <PotenzaTotale>155W RMS</PotenzaTotale>
+  <Potenze>POWER (FRONT)
+48W RMS (each)
+POWER (CENTER)
+16W RMS
+POWER (REAR)
+8W RMS (each)
+POWER (SUBWOOFER)
+27W RMS</Potenze>
+ </Altoparlanti>
+ <Altoparlanti>
+  <Nome>KRK VXT 8</Nome>
+  <Prezzo>444</Prezzo>
+  <Produttore>KRK</Produttore>
+  <Colore>Black</Colore>
+  <Configurazione>2ch</Configurazione>
+  <FrequenzaDiRisposta>37 Hz - 22 KHz</FrequenzaDiRisposta>
+  <PotenzaTotale>360W RMS</PotenzaTotale>
+  <Potenze>POWER (FRONT)
+180W RMS (each)</Potenze>
+ </Altoparlanti>
+ <Cuffie>
+  <Nome>Kingston HyperX Cloud II</Nome>
+  <Prezzo>85.99</Prezzo>
+  <Produttore>Kingston</Produttore>
+  <Tipologia>Circumaural</Tipologia>
+  <SistemaAcustico>Closed</SistemaAcustico>
+  <Colore>Black/Red</Colore>
+  <Microfono>1</Microfono>
+  <Canali>7.1</Canali>
+  <Impedenza>60 Ω</Impedenza>
+  <FrequenzaDiRisposta>15 Hz - 25 KHz</FrequenzaDiRisposta>
+  <Connessione>Wired</Connessione>
+  <Connettore>3.5mm, USB 2.0</Connettore>
+ </Cuffie>
+ <Cuffie>
+  <Nome>Audio-Technica M50x</Nome>
+  <Prezzo>163.96</Prezzo>
+  <Produttore>Audio-Technica</Produttore>
+  <Tipologia>Circumaural</Tipologia>
+  <SistemaAcustico>Closed</SistemaAcustico>
+  <Colore>Black/Silver</Colore>
+  <Microfono>0</Microfono>
+  <Canali>2.0</Canali>
+  <Impedenza>38 Ω</Impedenza>
+  <FrequenzaDiRisposta>15 Hz - 28 KHz</FrequenzaDiRisposta>
+  <Connessione>Wired</Connessione>
+  <Connettore>3.5mm</Connettore>
+ </Cuffie>
+</Componenti>

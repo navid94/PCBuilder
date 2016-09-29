@@ -117,102 +117,6 @@ MyWidget_CreaConfPCBuilder::MyWidget_CreaConfPCBuilder(QWidget* parent):QWidget(
     setLayout(verticalLayout1);
 }
 
-void MyWidget_CreaConfPCBuilder::updateTotalePrezzo(){
-    double tot=0;
-    QString processorePrezzo=processorePrezzoLabel->text();
-    QString dissipatoreProcessorePrezzo=dissipatoreProcessorePrezzoLabel->text();
-    QString schedaMadrePrezzo=schedaMadrePrezzoLabel->text();
-    QString memoriaPrezzo=memoriaPrezzoLabel->text();
-    QString archiviazionePrezzo=archiviazionePrezzoLabel->text();
-    QString schedaGraficaPrezzo=schedaGraficaPrezzoLabel->text();
-    QString casePrezzo=casePrezzoLabel->text();
-    QString alimentatorePrezzo=alimentatorePrezzoLabel->text();
-    QString unitaOtticaPrezzo=unitaOtticaPrezzoLabel->text();
-    QString sistemaOperativoPrezzo=sistemaOperativoPrezzoLabel->text();
-    QString monitorPrezzo=monitorPrezzoLabel->text();
-    QString mousePrezzo=mousePrezzoLabel->text();
-    QString tastieraPrezzo=tastieraPrezzoLabel->text();
-    QString cuffiePrezzo=cuffiePrezzoLabel->text();
-    QString altoparlantiPrezzo=altoparlantiPrezzoLabel->text();
-
-    if (processorePrezzo!="")
-    {
-        processorePrezzo.remove("€ ");
-        tot=tot+processorePrezzo.toDouble();
-    }
-    if (dissipatoreProcessorePrezzo!="")
-    {
-        dissipatoreProcessorePrezzo.remove("€ ");
-        tot=tot+dissipatoreProcessorePrezzo.toDouble();
-    }
-    if (schedaMadrePrezzo!="")
-    {
-        schedaMadrePrezzo.remove("€ ");
-        tot=tot+schedaMadrePrezzo.toDouble();
-    }
-    if (memoriaPrezzo!="")
-    {
-        memoriaPrezzo.remove("€ ");
-        tot=tot+memoriaPrezzo.toDouble();
-    }
-    if (archiviazionePrezzo!="")
-    {
-        archiviazionePrezzo.remove("€ ");
-        tot=tot+archiviazionePrezzo.toDouble();
-    }
-    if (schedaGraficaPrezzo!="")
-    {
-        schedaGraficaPrezzo.remove("€ ");
-        tot=tot+schedaGraficaPrezzo.toDouble();
-    }
-    if (casePrezzo!="")
-    {
-        casePrezzo.remove("€ ");
-        tot=tot+casePrezzo.toDouble();
-    }
-    if (alimentatorePrezzo!="")
-    {
-        alimentatorePrezzo.remove("€ ");
-        tot=tot+alimentatorePrezzo.toDouble();
-    }
-    if (unitaOtticaPrezzo!="")
-    {
-        unitaOtticaPrezzo.remove("€ ");
-        tot=tot+unitaOtticaPrezzo.toDouble();
-    }
-    if (sistemaOperativoPrezzo!="")
-    {
-        sistemaOperativoPrezzo.remove("€ ");
-        tot=tot+sistemaOperativoPrezzo.toDouble();
-    }
-    if (monitorPrezzo!="")
-    {
-        monitorPrezzo.remove("€ ");
-        tot=tot+monitorPrezzo.toDouble();
-    }
-    if (mousePrezzo!="")
-    {
-        mousePrezzo.remove("€ ");
-        tot=tot+mousePrezzo.toDouble();
-    }
-    if (tastieraPrezzo!="")
-    {
-        tastieraPrezzo.remove("€ ");
-        tot=tot+tastieraPrezzo.toDouble();
-    }
-    if (cuffiePrezzo!="")
-    {
-        cuffiePrezzo.remove("€ ");
-        tot=tot+cuffiePrezzo.toDouble();
-    }
-    if (altoparlantiPrezzo!="")
-    {
-        altoparlantiPrezzo.remove("€ ");
-        tot=tot+altoparlantiPrezzo.toDouble();
-    }
-    prezzoTotaleLabel->setText("€ "+(QString::number(tot)));
-}
-
 void MyWidget_CreaConfPCBuilder::createLabels(){
     PCBuiler_creaconfLabel=new QLabel("PCBuilder - "+(tr("Crea la tua configurazione")));
     QFont font_PCBuilder_creaconfLabel=PCBuiler_creaconfLabel->font();
@@ -735,5 +639,5 @@ void MyWidget_CreaConfPCBuilder::setAltoparlantiPrezzoLabel(const QString& prezz
 }
 
 void MyWidget_CreaConfPCBuilder::setPrezzoTotaleLabel(const QString& prezzoTotale){
-    prezzoTotaleLabel->setText(prezzoTotale);
+    prezzoTotaleLabel->setText("€ "+prezzoTotale);
 }

@@ -3,12 +3,15 @@
 
 #include "Utente.h"
 #include "Container.h"
+#include "PCBuilderController.h"
 #include <QString>
 
 class DBUtenti{
 private:
     Container<Utente*> dbUtenti;
+    PCBuilderController* controller;
 public:
+    DBUtenti(PCBuilderController*);
     void aggiungi_utente(Utente*);
     void rimuovi_utente(Utente*);
     Utente* find_utente(const QString&) const;

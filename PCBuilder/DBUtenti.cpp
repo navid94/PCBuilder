@@ -8,6 +8,8 @@
 #include <iostream>
 using namespace std;
 
+DBUtenti::DBUtenti(PCBuilderController* input_controller):controller(input_controller){}
+
 void DBUtenti::aggiungi_utente(Utente* u){
     dbUtenti.aggiungi_elemento(u);
 }
@@ -160,7 +162,22 @@ void DBUtenti::modifica_utente(const QString& utente, const QString& username, c
         }
 
         if (tipo_account!="")
+        {
             tipoaccount_node.firstChild().setNodeValue(tipo_account);
+            Profilo pf = *(user->get_Profilo());
+            Login id=*(user->get_Login());
+            QVector<Configurazione*> configurazioni=*(user->getConfigurazioni());
+            controller->getDBUtenti()->rimuovi_utente(user);
+            if (tipo_account=="UtentePremium")
+            {
+                user=new UtentePremium(controller,id,pf,configurazioni);
+            }
+            else if(tipo_account=="UtenteRegistrato")
+            {
+                user=new UtenteRegistrato(controller,id,pf,configurazioni);
+            }
+            controller->getDBUtenti()->aggiungi_utente(user);
+        }
 
         file.resize(0);
         QTextStream out(&file);

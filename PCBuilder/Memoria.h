@@ -10,9 +10,17 @@ private:
     QString tipologia;
     int latenza;
 public:
-    Memoria(const QString&, double, const QString&, const QString&, const QString&, const QString&, int);
-    virtual void saveXMLComponente();
-    virtual void deleteXMLComponente();
+    Memoria(const QString&, double, const QString&, PCBuilderController*, const QString&, const QString&, const QString&, int);
+    Memoria(PCBuilderController*);
+    virtual void saveXMLComponente() const;
+    virtual void deleteXMLComponente() const;
+    virtual void setAddWidget() const;
+    virtual void addComponente() const;
+    virtual void clearAddWidget() const;
+    virtual void setSpecsWidget() const;
+    virtual Componente* clone() const;
+    virtual void updateConfigurazione() const;
+    virtual QString getNomeTipoComponente() const;
     virtual QString getType() const;
 
     QString getVelocita() const;

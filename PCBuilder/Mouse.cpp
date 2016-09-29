@@ -3,13 +3,15 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Mouse::Mouse(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Mouse::Mouse(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
              const QString& input_connessione, const QString& input_tipologiaTracciamento, int input_DPIMassimi,
-             const QString& input_colore, const QString& input_orientamentoDellaMano):Componente(input_nome,input_prezzo,input_produttore),
+             const QString& input_colore, const QString& input_orientamentoDellaMano):Componente(input_nome,input_prezzo,input_produttore,input_controller),
     connessione(input_connessione),tipologiaTracciamento(input_tipologiaTracciamento),DPIMassimi(input_DPIMassimi),
     colore(input_colore),orientamentoDellaMano(input_orientamentoDellaMano){}
 
-void Mouse::saveXMLComponente(){
+Mouse::Mouse(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Mouse::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -111,7 +113,7 @@ void Mouse::saveXMLComponente(){
     }
 }
 
-void Mouse::deleteXMLComponente(){
+void Mouse::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -167,6 +169,35 @@ void Mouse::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Mouse::clone() const{
+    return new Mouse(*this);
+}
+
+void Mouse::setAddWidget() const{
+    this->getController()->createMouseAdd();
+}
+
+void Mouse::addComponente() const{
+    this->getController()->eseguiAggiuntaMouse();
+}
+
+void Mouse::setSpecsWidget() const{
+    this->getController()->createMouseSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getConnessione(),this->getTipologiaTracciamento(),
+                                            this->getDPIMassimi(),this->getColore(),this->getOrientamentoDellaMano());
+}
+
+void Mouse::clearAddWidget() const{
+    this->getController()->clearMouseAdd();
+}
+
+void Mouse::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneMouse(this->getNome(),this->getPrezzo());
+}
+
+QString Mouse::getNomeTipoComponente() const{
+    return "Mouse";
 }
 
 QString Mouse::getConnessione() const{

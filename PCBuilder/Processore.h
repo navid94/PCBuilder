@@ -19,11 +19,19 @@ private:
     bool hyperThreading;
     QString graficaIntegrata;
 public:
-    Processore(const QString&, double, const QString&, const QString&, const QString&, const QString&, const QString&,
+    Processore(const QString&, double, const QString&, PCBuilderController*, const QString&, const QString&, const QString&, const QString&,
                int, const QString&, const QString&, const QString&, const QString&, const QString&, bool,
                 bool, const QString&);
-    virtual void saveXMLComponente();
-    virtual void deleteXMLComponente();
+    Processore(PCBuilderController*);
+    virtual void saveXMLComponente() const;
+    virtual void deleteXMLComponente() const;
+    virtual void setAddWidget() const;
+    virtual void addComponente() const;
+    virtual void clearAddWidget() const;
+    virtual void setSpecsWidget() const;
+    virtual Componente* clone() const;
+    virtual void updateConfigurazione() const;
+    virtual QString getNomeTipoComponente() const;
     virtual QString getType() const;
 
     QString getSocket() const;

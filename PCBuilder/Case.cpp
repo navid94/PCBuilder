@@ -3,15 +3,17 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Case::Case(const QString& input_nome, double input_prezzo, const QString& input_produttore, const QString& input_tipologia,
+Case::Case(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller, const QString& input_tipologia,
            const QString& input_colore, bool input_alimentatoreIncluso, int input_slotInterni25, int input_slotInterni35,
            const QString& input_compatibilitaSchedaMadre, const QString& input_lunghezzaMassimaSchedaGrafica,
-           const QString& input_dimensioni):Componente(input_nome,input_prezzo,input_produttore),
+           const QString& input_dimensioni):Componente(input_nome,input_prezzo,input_produttore, input_controller),
     tipologia(input_tipologia),colore(input_colore),alimentatoreIncluso(input_alimentatoreIncluso),
     slotInterni25(input_slotInterni25),slotInterni35(input_slotInterni35),compatibilitaSchedaMadre(input_compatibilitaSchedaMadre),
     lunghezzaMassimaSchedaGrafica(input_lunghezzaMassimaSchedaGrafica),dimensioni(input_dimensioni){}
 
-void Case::saveXMLComponente(){
+Case::Case(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Case::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -137,7 +139,7 @@ void Case::saveXMLComponente(){
     }
 }
 
-void Case::deleteXMLComponente(){
+void Case::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -202,6 +204,36 @@ void Case::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Case::clone() const{
+    return new Case(*this);
+}
+
+void Case::setAddWidget() const{
+    this->getController()->createCaseAdd();
+}
+
+void Case::addComponente() const{
+    this->getController()->eseguiAggiuntaCase();
+}
+
+void Case::setSpecsWidget() const{
+    this->getController()->createCaseSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getTipologia(),this->getColore(),
+                                           this->getAlimentatoreIncluso(),this->getSlotInterni25(),this->getSlotInterni35(),this->getCompatibilitaSchedaMadre(),
+                                           this->getLunghezzaMassimaSchedaGrafica(),this->getDimensioni());
+}
+
+void Case::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneCase(this->getNome(),this->getPrezzo());
+}
+
+void Case::clearAddWidget() const{
+    return this->getController()->clearCaseAdd();
+}
+
+QString Case::getNomeTipoComponente() const{
+    return "Case";
 }
 
 QString Case::getTipologia() const{

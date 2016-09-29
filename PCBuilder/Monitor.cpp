@@ -3,18 +3,20 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Monitor::Monitor(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Monitor::Monitor(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                  const QString& input_risoluzioneRaccomandata, bool input_widescreen,
                  const QString& input_formato, const QString& input_angoloDiVisualizzazione,
                  const QString& input_coloriDelDisplay, const QString& input_luminosita, const QString& input_rapportoDiContrasto,
                  const QString& input_tempoDiRisposta, const QString& input_tipologiaDisplay,
-                 bool input_altoparlantiIncorporati, const QString& input_frequenzaDiAggiornamento):Componente(input_nome,input_prezzo,input_produttore),
+                 bool input_altoparlantiIncorporati, const QString& input_frequenzaDiAggiornamento):Componente(input_nome,input_prezzo,input_produttore,input_controller),
     risoluzioneRaccomandata(input_risoluzioneRaccomandata),widescreen(input_widescreen),formato(input_formato),
     angoloDiVisualizzazione(input_angoloDiVisualizzazione),coloriDelDisplay(input_coloriDelDisplay),luminosita(input_luminosita),
     rapportoDiContrasto(input_rapportoDiContrasto),tempoDiRisposta(input_tempoDiRisposta),tipologiaDisplay(input_tipologiaDisplay),
     altoparlantiIncorporati(input_altoparlantiIncorporati),frequenzaDiAggiornamento(input_frequenzaDiAggiornamento){}
 
-void Monitor::saveXMLComponente(){
+Monitor::Monitor(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Monitor::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -164,7 +166,7 @@ void Monitor::saveXMLComponente(){
     }
 }
 
-void Monitor::deleteXMLComponente(){
+void Monitor::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -238,6 +240,36 @@ void Monitor::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Monitor::clone() const{
+    return new Monitor(*this);
+}
+
+void Monitor::setAddWidget() const{
+    this->getController()->createMonitorAdd();
+}
+
+void Monitor::addComponente() const{
+    this->getController()->eseguiAggiuntaMonitor();
+}
+
+void Monitor::setSpecsWidget() const{
+    this->getController()->createMonitorSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getRisoluzioneRaccomandata(),this->getWidescreen(),
+                                              this->getFormato(),this->getAngoloDiVisualizzazione(),this->getColoriDelDisplay(),this->getLuminosita(),this->getRapportoDiContrasto(),
+                                              this->getTempoDiRisposta(),this->getTipologiaDisplay(),this->getAltoparlantiIncorporati(),this->getFrequenzaDiAggiornamento());
+}
+
+void Monitor::clearAddWidget() const{
+    this->getController()->clearMonitorAdd();
+}
+
+void Monitor::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneMonitor(this->getNome(),this->getPrezzo());
+}
+
+QString Monitor::getNomeTipoComponente() const{
+    return "Monitor";
 }
 
 QString Monitor::getRisoluzioneRaccomandata() const{

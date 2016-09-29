@@ -2,16 +2,35 @@
 #define MYWIDGET_CONFIGURAZIONEPCBUILDER_H
 
 #include <QWidget>
-
-class MainWindow;
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
 
 class MyWidget_ConfigurazionePCBuilder:public QWidget{
     Q_OBJECT
 private:
-    MainWindow* mw;
+    QGridLayout* gridLayout;
+
+    QLabel* PCBuiler_ConfigurazioneLabel;
+    QLabel* nomeConfigurazioneLabel;
+    QLabel* nomeConfigurazioneValueLabel;
+    QLabel* componenteLabel;
+    QLabel* selezioneLabel;
+    QLabel* prezzoLabel;
+    QLabel* totaleLabel;
+    QLabel* prezzoTotaleLabel;
+
+    QPushButton* indietroPushButton;
 public:
-    MyWidget_ConfigurazionePCBuilder(MainWindow*,QWidget* =0);
-    ~MyWidget_ConfigurazionePCBuilder();
+    MyWidget_ConfigurazionePCBuilder(QWidget* =0);
+    void createLabels();
+    void createPushButtons();
+
+    QGridLayout* getGridLayout() const;
+    QPushButton* getIndietroPushButton() const;
+    void setNomeConfigurazioneValueLabel(const QString&);
+    void setPrezzoTotaleLabel(const QString&);
+
 };
 
 

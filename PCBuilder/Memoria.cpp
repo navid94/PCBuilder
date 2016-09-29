@@ -3,12 +3,14 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Memoria::Memoria(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Memoria::Memoria(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                  const QString& input_velocita, const QString& input_capacita, const QString& input_tipologia,
-                 int input_latenza):Componente(input_nome, input_prezzo, input_produttore), velocita(input_velocita),
+                 int input_latenza):Componente(input_nome, input_prezzo, input_produttore, input_controller), velocita(input_velocita),
     capacita(input_capacita), tipologia(input_tipologia), latenza(input_latenza){}
 
-void Memoria::saveXMLComponente(){
+Memoria::Memoria(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Memoria::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -105,7 +107,7 @@ void Memoria::saveXMLComponente(){
     }
 }
 
-void Memoria::deleteXMLComponente(){
+void Memoria::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -158,6 +160,35 @@ void Memoria::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Memoria::clone() const{
+    return new Memoria(*this);
+}
+
+void Memoria::setAddWidget() const{
+    this->getController()->createMemoriaAdd();
+}
+
+void Memoria::addComponente() const{
+    this->getController()->eseguiAggiuntaMemoria();
+}
+
+void Memoria::setSpecsWidget() const{
+    this->getController()->createMemoriaSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getVelocita(),this->getCapacita(),
+                                              this->getTipologia(),this->getLatenza());
+}
+
+void Memoria::clearAddWidget() const{
+    this->getController()->clearMemoriaAdd();
+}
+
+void Memoria::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneMemoria(this->getNome(),this->getPrezzo());
+}
+
+QString Memoria::getNomeTipoComponente() const{
+    return "Memoria";
 }
 
 QString Memoria::getVelocita() const{

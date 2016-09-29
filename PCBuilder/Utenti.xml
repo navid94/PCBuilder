@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Utenti>
+ <Utente>
+  <Username>Premium</Username>
+  <Tipo_account>UtentePremium</Tipo_account>
+  <Email>premium@gmail.com</Email>
+  <Nome>nome</Nome>
+  <Cognome>cognome</Cognome>
+  <Password>123</Password>
+  <Data_nascita>01/01/1900</Data_nascita>
+ </Utente>
+ <Utente>
+  <Username>Normale</Username>
+  <Tipo_account>UtenteRegistrato</Tipo_account>
+  <Email>normale@gmail.com</Email>
+  <Nome>nome</Nome>
+  <Cognome>cognome</Cognome>
+  <Password>123</Password>
+  <Data_nascita>01/01/1900</Data_nascita>
+ </Utente>
+</Utenti>

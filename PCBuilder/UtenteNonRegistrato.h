@@ -16,6 +16,7 @@ public:
     virtual Profilo* get_Profilo() const;
     virtual QString get_type() const;
     virtual QVector<Configurazione*>* getConfigurazioni() const;
+    virtual Utente* clone() const;
 };
 
 

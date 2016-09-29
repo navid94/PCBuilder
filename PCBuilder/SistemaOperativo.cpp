@@ -3,11 +3,13 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-SistemaOperativo::SistemaOperativo(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+SistemaOperativo::SistemaOperativo(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                                    const QString& input_modalita, const QString& input_memoriaMassimaSupportata):
-    Componente(input_nome,input_prezzo,input_produttore),modalita(input_modalita),memoriaMassimaSupportata(input_memoriaMassimaSupportata){}
+    Componente(input_nome,input_prezzo,input_produttore, input_controller),modalita(input_modalita),memoriaMassimaSupportata(input_memoriaMassimaSupportata){}
 
-void SistemaOperativo::saveXMLComponente(){
+SistemaOperativo::SistemaOperativo(PCBuilderController* input_controller):Componente(input_controller){}
+
+void SistemaOperativo::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -16,7 +18,7 @@ void SistemaOperativo::saveXMLComponente(){
         file.open(QIODevice::ReadWrite);
         doc.setContent(&file);
         QDomNode root=doc.firstChildElement();
-        QDomNode sistemaOperativo_node=doc.createElement("SistemaOperarivo");
+        QDomNode sistemaOperativo_node=doc.createElement("SistemaOperativo");
         root.appendChild(sistemaOperativo_node);
 
         QDomNode nome_node=doc.createElement("Nome");
@@ -88,7 +90,7 @@ void SistemaOperativo::saveXMLComponente(){
     }
 }
 
-void SistemaOperativo::deleteXMLComponente(){
+void SistemaOperativo::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -135,6 +137,34 @@ void SistemaOperativo::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* SistemaOperativo::clone() const{
+    return new SistemaOperativo(*this);
+}
+
+void SistemaOperativo::setAddWidget() const{
+    this->getController()->createSistemaOperativoAdd();
+}
+
+void SistemaOperativo::addComponente() const{
+    this->getController()->eseguiAggiuntaSistemaOperativo();
+}
+
+void SistemaOperativo::setSpecsWidget() const{
+    this->getController()->createSistemaOperativoSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getModalita(),this->getMemoriaMassimaSupportata());
+}
+
+void SistemaOperativo::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneSistemaOperativo(this->getNome(),this->getPrezzo());
+}
+
+void SistemaOperativo::clearAddWidget() const{
+    this->getController()->clearSistemaOperativoAdd();
+}
+
+QString SistemaOperativo::getNomeTipoComponente() const{
+    return "Sistema operativo";
 }
 
 QString SistemaOperativo::getModalita() const{

@@ -3,12 +3,14 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-UnitaOttica::UnitaOttica(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+UnitaOttica::UnitaOttica(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                          const QString& input_fattoreDiForma, const QString& input_interfaccia,
-                         const QString& input_cache, const QString& input_velocita):Componente(input_nome,input_prezzo,input_produttore),
+                         const QString& input_cache, const QString& input_velocita):Componente(input_nome,input_prezzo,input_produttore,input_controller),
     fattoreDiForma(input_fattoreDiForma),interfaccia(input_interfaccia),cache(input_cache),velocita(input_velocita){}
 
-void UnitaOttica::saveXMLComponente(){
+UnitaOttica::UnitaOttica(PCBuilderController* input_controller):Componente(input_controller){}
+
+void UnitaOttica::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -105,7 +107,7 @@ void UnitaOttica::saveXMLComponente(){
     }
 }
 
-void UnitaOttica::deleteXMLComponente(){
+void UnitaOttica::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -158,6 +160,35 @@ void UnitaOttica::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* UnitaOttica::clone() const{
+    return new UnitaOttica(*this);
+}
+
+void UnitaOttica::setAddWidget() const{
+    this->getController()->createUnitaOtticaAdd();
+}
+
+void UnitaOttica::addComponente() const{
+    this->getController()->eseguiAggiuntaUnitaOttica();
+}
+
+void UnitaOttica::setSpecsWidget() const{
+    this->getController()->createUnitaOtticaSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getFattoreDiForma(),
+                                                  this->getInterfaccia(),this->getCache(),this->getVelocita());
+}
+
+void UnitaOttica::clearAddWidget() const{
+    this->getController()->clearUnitaOtticaAdd();
+}
+
+void UnitaOttica::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneUnitaOttica(this->getNome(),this->getPrezzo());
+}
+
+QString UnitaOttica::getNomeTipoComponente() const{
+    return "Unità ottica";
 }
 
 QString UnitaOttica::getFattoreDiForma() const{

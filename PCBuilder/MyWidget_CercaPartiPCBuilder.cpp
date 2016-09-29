@@ -12,9 +12,6 @@ MyWidget_CercaPartiPCBuilder::MyWidget_CercaPartiPCBuilder(QWidget* parent):QWid
 
     connect(tipologiaComponenteComboBox,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(loadPartsList(const QString&)));
 
-
-
-
     QHBoxLayout* horizontalLayout1=new QHBoxLayout;
     QHBoxLayout* horizontalLayout2=new QHBoxLayout;
     QVBoxLayout* verticalLayout1=new QVBoxLayout;

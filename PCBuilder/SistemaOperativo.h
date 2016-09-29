@@ -8,9 +8,17 @@ private:
     QString modalita;
     QString memoriaMassimaSupportata;
 public:
-    SistemaOperativo(const QString&, double, const QString&, const QString&, const QString&);
-    virtual void saveXMLComponente();
-    virtual void deleteXMLComponente();
+    SistemaOperativo(const QString&, double, const QString&, PCBuilderController*, const QString&, const QString&);
+    SistemaOperativo(PCBuilderController*);
+    virtual void saveXMLComponente() const;
+    virtual void deleteXMLComponente() const;
+    virtual void setAddWidget() const;
+    virtual void addComponente() const;
+    virtual void clearAddWidget() const;
+    virtual void setSpecsWidget() const;
+    virtual void updateConfigurazione() const;
+    virtual Componente* clone() const;
+    virtual QString getNomeTipoComponente() const;
     virtual QString getType() const;
 
     QString getModalita() const;

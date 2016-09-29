@@ -280,3 +280,7 @@ QString MyWidget_GestisciUtentiPCBuilder::mesenascitaValue() const{
 QString MyWidget_GestisciUtentiPCBuilder::annonascitaValue() const{
     return annonascitaComboBox->currentText();
 }
+
+QLineEdit* MyWidget_GestisciUtentiPCBuilder::get_username_utenterimuovereLineEdit() const{
+    return username_utenterimuovereLineEdit;
+}

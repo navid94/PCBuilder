@@ -1,4 +1,5 @@
 #include "PCBuilderGUI.h"
+#include "UtenteNonRegistrato.h"
 
 PCBuilderGUI::PCBuilderGUI(){
     controller=new PCBuilderController;
@@ -8,8 +9,4 @@ PCBuilderGUI::PCBuilderGUI(){
 PCBuilderGUI::~PCBuilderGUI(){
     delete controller;
     controller=0;
-    delete mw;
-    mw=0;
-    delete u;
-    u=0;
 }

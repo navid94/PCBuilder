@@ -3,13 +3,15 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Archiviazione::Archiviazione(const QString& input_nome, double input_prezzo, const QString& input_produttore, const QString& input_tipologia,
+Archiviazione::Archiviazione(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller, const QString& input_tipologia,
                              const QString& input_capacita, const QString& input_interfaccia, const QString& input_cache,
-                             const QString& input_fattoreDiForma, const QString& input_rpm):Componente(input_nome,input_prezzo,input_produttore),
+                             const QString& input_fattoreDiForma, const QString& input_rpm):Componente(input_nome,input_prezzo,input_produttore,input_controller),
     tipologia(input_tipologia),capacita(input_capacita),interfaccia(input_interfaccia),
     cache(input_cache),fattoreDiForma(input_fattoreDiForma),rpm(input_rpm){}
 
-void Archiviazione::saveXMLComponente(){
+Archiviazione::Archiviazione(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Archiviazione::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -119,7 +121,7 @@ void Archiviazione::saveXMLComponente(){
     }
 }
 
-void Archiviazione::deleteXMLComponente(){
+void Archiviazione::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -178,6 +180,35 @@ void Archiviazione::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Archiviazione::clone() const{
+    return new Archiviazione(*this);
+}
+
+void Archiviazione::setAddWidget() const{
+    this->getController()->createArchiviazioneAdd();
+}
+
+void Archiviazione::addComponente() const{
+    this->getController()->eseguiAggiuntaArchiviazione();
+}
+
+void Archiviazione::setSpecsWidget() const{
+    this->getController()->createArchiviazioneSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getTipologia(),this->getCapacita(),
+                                                    this->getInterfaccia(),this->getCache(),this->getFattoreDiForma(),this->getRpm());
+}
+
+void Archiviazione::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneArchiviazione(this->getNome(),this->getPrezzo());
+}
+
+void Archiviazione::clearAddWidget() const{
+    this->getController()->clearArchiviazioneAdd();
+}
+
+QString Archiviazione::getNomeTipoComponente() const{
+    return "Archiviazione";
 }
 
 QString Archiviazione::getTipologia() const{

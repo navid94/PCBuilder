@@ -1,73 +1,33 @@
 #include "Configurazione.h"
 
 Configurazione::Configurazione(const QString& input_nome)
-    :nome(input_nome),conf(new QVector<Componente*>){}
+    :nome(input_nome){}
+
+void Configurazione::aggiungiComponente(Componente* comp){
+    conf.push_back(comp);
+}
 
 QString Configurazione::getNome() const{
     return nome;
 }
 
-QVector<Componente*>* Configurazione::getConf() const{
+QVector<Componente*> Configurazione::getConf() const{
     return conf;
 }
 
-/*Alimentatore* Configurazione::getAlimentatore() const{
-    return alimentatore;
+double Configurazione::getPrezzoTotale() const{
+    double tot=0;
+    for (QVector<Componente*>::const_iterator it=conf.begin();it!=conf.end();it++)
+    {
+        tot=tot+(*it)->getPrezzo();
+    }
+    return tot;
 }
 
-Altoparlanti* Configurazione::getAltoparlanti() const{
-    return altoparlanti;
+void Configurazione::setNome(const QString& nomeConfigurazione){
+    nome=nomeConfigurazione;
 }
 
-Archiviazione* Configurazione::getArchiviazione() const{
-    return archiviazione;
+Configurazione* Configurazione::clone() const{
+    return new Configurazione(*this);
 }
-
-Case* Configurazione::getCase() const{
-    return _case;
-}
-
-Cuffie* Configurazione::getCuffie() const{
-    return cuffie;
-}
-
-DissipatoreProcessore* Configurazione::getDissipatoreProcessore() const{
-    return dissipatoreProcessore;
-}
-
-Memoria* Configurazione::getMemoria() const{
-    return memoria;
-}
-
-Monitor* Configurazione::getMonitor() const{
-    return monitor;
-}
-
-Mouse* Configurazione::getMouse() const{
-    return mouse;
-}
-
-Processore* Configurazione::getProcessore() const{
-    return processore;
-}
-
-SchedaGrafica* Configurazione::getSchedaGrafica() const{
-    return schedaGrafica;
-}
-
-SchedaMadre* Configurazione::getSchedaMadre() const{
-    return schedaMadre;
-}
-
-SistemaOperativo* Configurazione::getSistemaOperativo() const{
-    return sistemaOperativo;
-}
-
-Tastiera* Configurazione::getTastiera() const{
-    return tastiera;
-}
-
-UnitaOttica* Configurazione::getUnitaOttica() const{
-    return unitaOttica;
-}
-*/

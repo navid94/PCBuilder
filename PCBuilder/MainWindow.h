@@ -16,6 +16,7 @@
 #include "MyWidget_LeMieConfigurazioniPCBuilder.h"
 #include "MyWidget_CercaPartiPCBuilder.h"
 #include "MyWidget_SpecificheComponentePCBuilder.h"
+#include "MyWidget_ConfigurazionePCBuilder.h"
 
 #include <QMainWindow>
 #include <QAction>
@@ -62,6 +63,7 @@ private:
     MyWidget_LeMieConfigurazioniPCBuilder* LeMieConfigurazioniPCBuilder;
     MyWidget_CercaPartiPCBuilder* CercaPartiPCBuilder;
     MyWidget_SpecificheComponentePCBuilder* SpecificheComponentePCBuilder;
+    MyWidget_ConfigurazionePCBuilder* ConfigurazionePCBuilder;
 public:
     MainWindow(PCBuilderController*);
     ~MainWindow();
@@ -83,6 +85,10 @@ public:
     MyWidget_LeMieConfigurazioniPCBuilder* get_LeMieConfigurazioniPCBuilder() const;
     MyWidget_CercaPartiPCBuilder* get_CercaPartiPCBuilder() const;
     MyWidget_SpecificheComponentePCBuilder* get_SpecificheComponentePCBuilder() const;
+    MyWidget_ConfigurazionePCBuilder* get_ConfigurazionePCBuilder() const;
+
+    void set_PartsListPCBuilder(MyWidget_PartsListPCBuilder*);
+    void set_CreaConfPCBuilder(MyWidget_CreaConfPCBuilder*);
 
     void closeEvent(QCloseEvent*);
     void openLoginPopUpPCBuilder();
@@ -105,11 +111,10 @@ public slots:
     void openIndexPCBuilder();
     void openCreaConfPCBuilder();
     void openPartsListPCBuilder(const QString&);
-    void updateConfigurazione(const QString&);
-    void resetConfigurazione();
     void openLeMieConfigurazioniPCBuilder();
     void openCercaPartiPCBuilder();
     void openSpecificheComponentePCBuilder(const QString&);
+    void openConfigurazionePCBuilder(const QString&);
 };
 
 

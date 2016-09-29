@@ -21,3 +21,7 @@ QString UtenteNonRegistrato::get_type() const{
 QVector<Configurazione*>* UtenteNonRegistrato::getConfigurazioni() const{
     return 0;
 }
+
+Utente* UtenteNonRegistrato::clone() const{
+    return new UtenteNonRegistrato(*this);
+}

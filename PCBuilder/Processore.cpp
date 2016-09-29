@@ -3,17 +3,19 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-Processore::Processore(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+Processore::Processore(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                        const QString& input_socket, const QString& input_larghezzaDati, const QString& input_frequenzaOperativa,
                        const QString& input_frequenzaTurbo, int input_numeroCore, const QString& input_l1Cache,
                        const QString& input_l2Cache, const QString& input_l3Cache, const QString& input_litografia,
                        const QString& input_tdp, bool input_includeDissipatore, bool input_hyperThreading
-                       , const QString& input_graficaIntegrata):Componente(input_nome,input_prezzo,input_produttore),socket(input_socket),
+                       , const QString& input_graficaIntegrata):Componente(input_nome,input_prezzo,input_produttore, input_controller),socket(input_socket),
     larghezzaDati(input_larghezzaDati),frequenzaOperativa(input_frequenzaOperativa),frequenzaTurbo(input_frequenzaTurbo),
     numeroCore(input_numeroCore),l1Cache(input_l1Cache),l2Cache(input_l2Cache),l3Cache(input_l3Cache),litografia(input_litografia),
     tdp(input_tdp),includeDissipatore(input_includeDissipatore),hyperThreading(input_hyperThreading),graficaIntegrata(input_graficaIntegrata){}
 
-void Processore::saveXMLComponente(){
+Processore::Processore(PCBuilderController* input_controller):Componente(input_controller){}
+
+void Processore::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -179,7 +181,7 @@ void Processore::saveXMLComponente(){
     }
 }
 
-void Processore::deleteXMLComponente(){
+void Processore::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -259,6 +261,36 @@ void Processore::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* Processore::clone() const{
+    return new Processore(*this);
+}
+
+void Processore::setAddWidget() const{
+    this->getController()->createProcessoreAdd();
+}
+
+void Processore::addComponente() const{
+    this->getController()->eseguiAggiuntaProcessore();
+}
+
+void Processore::setSpecsWidget() const{
+    this->getController()->createProcessoreSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getSocket(),this->getLarghezzaDati(),
+                                                 this->getFrequenzaOperativa(),this->getFrequenzaTurbo(),this->getNumeroCore(),this->getL1Cache(),this->getL2Cache(),
+                                                 this->getL3Cache(),this->getLitografia(),this->getTdp(),this->getIncludeDissipatore(),this->getHyperThreading(),this->getGraficaIntegrata());
+}
+
+void Processore::clearAddWidget() const{
+    this->getController()->clearProcessoreAdd();
+}
+
+void Processore::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneProcessore(this->getNome(),this->getPrezzo());
+}
+
+QString Processore::getNomeTipoComponente() const{
+    return "Processore";
 }
 
 QString Processore::getSocket() const{

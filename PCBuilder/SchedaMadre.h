@@ -21,11 +21,19 @@ private:
     int usb2;
     int usb3;
 public:
-    SchedaMadre(const QString&, double, const QString&, const QString&, const QString&, const QString&,
+    SchedaMadre(const QString&, double, const QString&, PCBuilderController*, const QString&, const QString&, const QString&,
                  const QString&, const QString&, const QString&, bool, bool, bool, const QString&, int,
                  int, int, int, int);
-    virtual void saveXMLComponente();
-    virtual void deleteXMLComponente();
+    SchedaMadre(PCBuilderController*);
+    virtual void saveXMLComponente() const;
+    virtual void deleteXMLComponente() const;
+    virtual void setAddWidget() const;
+    virtual void addComponente() const;
+    virtual void setSpecsWidget() const;
+    virtual Componente* clone() const;
+    virtual void clearAddWidget() const;
+    virtual void updateConfigurazione() const;
+    virtual QString getNomeTipoComponente() const;
     virtual QString getType() const;
 
     QString getFattoreDiForma() const;

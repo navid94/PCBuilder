@@ -3,17 +3,19 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-SchedaMadre::SchedaMadre(const QString& input_nome, double input_prezzo, const QString& input_produttore, const QString& input_fattoreDiForma,
+SchedaMadre::SchedaMadre(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller, const QString& input_fattoreDiForma,
                          const QString& input_chipset, const QString& input_socketProcessore, const QString& input_slotMemoria,
                          const QString& input_tipologiaMemoria, const QString& input_memoriaMassima, bool input_supportoRAID,
                          bool input_supportoCrossfire, bool input_supportoSLI, const QString& input_ethernet,
                          int input_sata3GBs, int input_sata6GBs, int input_sataExpress, int input_usb2, int input_usb3):
-    Componente(input_nome,input_prezzo,input_produttore),fattoreDiForma(input_fattoreDiForma),chipset(input_chipset),
+    Componente(input_nome,input_prezzo,input_produttore, input_controller),fattoreDiForma(input_fattoreDiForma),chipset(input_chipset),
     socketProcessore(input_socketProcessore),slotMemoria(input_slotMemoria), tipologiaMemoria(input_tipologiaMemoria),
     memoriaMassima(input_memoriaMassima),supportoRAID(input_supportoRAID),supportoCrossfire(input_supportoCrossfire),supportoSLI(input_supportoSLI),
     ethernet(input_ethernet),sata3GBs(input_sata3GBs),sata6GBs(input_sata6GBs),sataExpress(input_sataExpress),usb2(input_usb2),usb3(input_usb3){}
 
-void SchedaMadre::saveXMLComponente(){
+SchedaMadre::SchedaMadre(PCBuilderController* input_controller):Componente(input_controller){}
+
+void SchedaMadre::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -196,7 +198,7 @@ void SchedaMadre::saveXMLComponente(){
     }
 }
 
-void SchedaMadre::deleteXMLComponente(){
+void SchedaMadre::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -282,6 +284,36 @@ void SchedaMadre::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* SchedaMadre::clone() const{
+    return new SchedaMadre(*this);
+}
+
+void SchedaMadre::setAddWidget() const{
+    this->getController()->createSchedaMadreAdd();
+}
+
+void SchedaMadre::addComponente() const{
+    this->getController()->eseguiAggiuntaSchedaMadre();
+}
+
+void SchedaMadre::setSpecsWidget() const{
+    this->getController()->createSchedaMadreSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getFattoreDiForma(),this->getChipset(),
+                                                  this->getSocketProcessore(),this->getSlotMemoria(),this->getTipologiaMemoria(),this->getMemoriaMassima(),this->getSupportoRAID(),
+                                                  this->getSupportoCrossfire(),this->getSupportoSLI(),this->getEthernet(),this->getSata3GBs(),this->getSata6GBs(),this->getSataExpress(),this->getUsb2(),this->getUsb3());
+}
+
+void SchedaMadre::clearAddWidget() const{
+    this->getController()->clearSchedaMadreAdd();
+}
+
+void SchedaMadre::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneSchedaMadre(this->getNome(),this->getPrezzo());
+}
+
+QString SchedaMadre::getNomeTipoComponente() const{
+    return "Scheda madre";
 }
 
 QString SchedaMadre::getFattoreDiForma() const{

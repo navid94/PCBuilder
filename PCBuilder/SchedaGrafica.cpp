@@ -3,14 +3,16 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-SchedaGrafica::SchedaGrafica(const QString& input_nome, double input_prezzo, const QString& input_produttore,
+SchedaGrafica::SchedaGrafica(const QString& input_nome, double input_prezzo, const QString& input_produttore, PCBuilderController* input_controller,
                              const QString& input_interfaccia, const QString& input_chipset, const QString& input_memoria
                              , const QString& input_tipologiaMemoria, const QString& input_frequenzaCore, const QString& input_tdp
                              , const QString& input_supportoSLI, const QString& input_supportoCrossfire, const QString& input_lunghezza):
-    Componente(input_nome,input_prezzo,input_produttore), interfaccia(input_interfaccia), chipset(input_chipset), memoria(input_memoria),
+    Componente(input_nome,input_prezzo,input_produttore, input_controller), interfaccia(input_interfaccia), chipset(input_chipset), memoria(input_memoria),
     tipologiaMemoria(input_tipologiaMemoria),frequenzaCore(input_frequenzaCore), tdp(input_tdp), supportoSLI(input_supportoSLI), supportoCrossfire(input_supportoCrossfire), lunghezza(input_lunghezza){}
 
-void SchedaGrafica::saveXMLComponente(){
+SchedaGrafica::SchedaGrafica(PCBuilderController* input_controller):Componente(input_controller){}
+
+void SchedaGrafica::saveXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -144,7 +146,7 @@ void SchedaGrafica::saveXMLComponente(){
     }
 }
 
-void SchedaGrafica::deleteXMLComponente(){
+void SchedaGrafica::deleteXMLComponente() const{
     QString filename="Componenti.xml";
     if (QFile::exists(filename))
     {
@@ -212,6 +214,36 @@ void SchedaGrafica::deleteXMLComponente(){
         out<<doc.toString();
         file.close();
     }
+}
+
+Componente* SchedaGrafica::clone() const{
+    return new SchedaGrafica(*this);
+}
+
+void SchedaGrafica::setAddWidget() const{
+    this->getController()->createSchedaGraficaAdd();
+}
+
+void SchedaGrafica::addComponente() const{
+    this->getController()->eseguiAggiuntaSchedaGrafica();
+}
+
+void SchedaGrafica::setSpecsWidget() const{
+    this->getController()->createSchedaGraficaSpecs(this->getNome(),this->getPrezzo(),this->getProduttore(),this->getInterfaccia(),this->getChipset(),
+                                                    this->getMemoria(),this->getTipologiaMemoria(),this->getFrequenzaCore(),this->getTdp(),
+                                                    this->getSupportoSLI(),this->getSupportoCrossfire(),this->getLunghezza());
+}
+
+void SchedaGrafica::clearAddWidget() const{
+    this->getController()->clearSchedaGraficaAdd();
+}
+
+void SchedaGrafica::updateConfigurazione() const{
+    this->getController()->updateConfigurazioneSchedaGrafica(this->getNome(),this->getPrezzo());
+}
+
+QString SchedaGrafica::getNomeTipoComponente() const{
+    return "Scheda grafica";
 }
 
 QString SchedaGrafica::getInterfaccia() const{

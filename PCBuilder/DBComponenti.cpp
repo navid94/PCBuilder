@@ -24,3 +24,7 @@ Componente* DBComponenti::find_componente(const QString& nome) const{
     }
     return 0;
 }
+
+const Container<Componente*>& DBComponenti::getDBComponenti() const{
+    return dbComponenti;
+}

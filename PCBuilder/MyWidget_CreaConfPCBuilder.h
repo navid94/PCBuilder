@@ -94,8 +94,6 @@ private:
 public:
     MyWidget_CreaConfPCBuilder(QWidget* =0);
 
-    void updateTotalePrezzo();
-
     QGridLayout* getGridLayout() const;
 
     QPushButton* getIndietroPushButton() const;

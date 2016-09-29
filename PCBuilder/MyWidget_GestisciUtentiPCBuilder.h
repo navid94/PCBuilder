@@ -50,6 +50,8 @@ public:
     QPushButton* get_modificaPushButton() const;
     QPushButton* get_elimina_utentePushButton() const;
 
+    QLineEdit* get_username_utenterimuovereLineEdit() const;
+
     QString username_utentemodificaValue() const;
     QString usernameValue() const;
     QString emailValue() const;

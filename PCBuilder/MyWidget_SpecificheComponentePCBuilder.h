@@ -5,26 +5,24 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QString>
-
-class MainWindow;
+#include <QLayout>
 
 class MyWidget_SpecificheComponentePCBuilder:public QWidget{
     Q_OBJECT
 private:
-    MainWindow* mw;
-    QString componente;
     QLabel* PCBuilder_SpecificheComponenteLabel;
 
-
+    QVBoxLayout* verticalLayout1;
 
     QPushButton* indietroPushButton;
 
     void createLabels();
     void createPushButtons();
 public:
-    MyWidget_SpecificheComponentePCBuilder(MainWindow*,const QString&,QWidget* =0);
+    MyWidget_SpecificheComponentePCBuilder(QWidget* =0);
 
     QPushButton* getIndietroPushButton() const;
+    QVBoxLayout* getVerticalLayout1() const;
 
 };
 
